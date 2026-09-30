@@ -1,0 +1,311 @@
+/* ========================================================
+   FLOATING PILL NAVBAR / HEADER
+   ======================================================== */
+.site-header-container {
+  position: fixed;
+  top: clamp(36px, 4vw, 46px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: auto;
+  max-width: calc(100vw - 32px);
+  pointer-events: auto;
+}
+
+.header-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3.5vw, 44px);
+  padding: 6px 6px 6px clamp(18px, 2vw, 28px);
+  border-radius: 9999px;
+  box-sizing: border-box;
+  transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 1. Initial Transparent State (at the top over hero) */
+.header-pill-transparent {
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.header-pill-transparent .header-logo-img {
+  filter: brightness(0) invert(1); /* Pure crisp white logo over dark/red hero */
+}
+
+.header-pill-transparent .header-nav-link {
+  color: #ffffff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+.header-pill-transparent .header-nav-link:hover {
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.header-pill-transparent .nav-chevron-icon {
+  stroke: #ffffff;
+}
+
+.header-pill-transparent .header-right-capsule {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* 2. Scrolled State (white pill background) */
+.header-pill-scrolled {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 14px 40px -8px rgba(0, 0, 0, 0.12),
+              0 2px 8px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.header-pill-scrolled .header-logo-img {
+  filter: none; /* Original crisp black logo on white pill */
+}
+
+.header-pill-scrolled .header-nav-link {
+  color: #1a1a1a;
+  text-shadow: none;
+}
+
+.header-pill-scrolled .header-nav-link:hover {
+  color: #000000;
+}
+
+.header-pill-scrolled .nav-chevron-icon {
+  stroke: #1a1a1a;
+}
+
+.header-pill-scrolled .header-right-capsule {
+  background: linear-gradient(90deg, #050505 0%, #161616 60%, #303030 100%);
+  border: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* Brand Logo Styling */
+.header-brand-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  user-select: none;
+}
+
+.header-brand-logo:hover {
+  transform: scale(1.04);
+}
+
+.header-logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.35s ease;
+}
+
+/* Middle Navigation Links */
+.header-nav-list {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 32px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Articulat CF', 'Articulatcf', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  padding: 8px 4px;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.25s ease, opacity 0.25s ease, transform 0.2s ease;
+  background: transparent;
+  border: none;
+}
+
+.header-nav-link:hover {
+  transform: translateY(-1px);
+}
+
+.nav-chevron-icon {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2.2;
+  transition: transform 0.25s ease, stroke 0.3s ease;
+  opacity: 0.85;
+}
+
+.header-dropdown-parent:hover .nav-chevron-icon,
+.header-dropdown-parent.active .nav-chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Container */
+.header-dropdown-parent {
+  position: relative;
+}
+
+.header-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 18px;
+  padding: 8px;
+  min-width: 200px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.16),
+              0 2px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-dropdown-parent:hover .header-dropdown-menu,
+.header-dropdown-parent.active .header-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-item {
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #202020;
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background: #f4eee8;
+  color: #000;
+}
+
+/* Right Capsule Cluster */
+.header-right-capsule {
+  display: flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 3px;
+  position: relative;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Business Design Pill Button */
+.btn-business-design {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px clamp(14px, 1.6vw, 22px);
+  border-radius: 9999px;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Articulat CF', 'Articulatcf', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-business-design:hover {
+  background-color: #111111;
+  transform: translateY(-0.5px);
+}
+
+.btn-business-design .nav-chevron-icon {
+  width: 12px;
+  height: 12px;
+  stroke: #ffffff;
+}
+
+/* Contact Us Button inside right capsule */
+.btn-contact-us {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px clamp(14px, 1.8vw, 24px);
+  border-radius: 9999px;
+  background: transparent;
+  color: #f6f6f6;
+  font-family: 'Articulat CF', 'Articulatcf', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+}
+
+.btn-contact-us:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Responsive Styles */
+@media (max-width: 860px) {
+  .site-header-container {
+    top: 20px;
+    width: calc(100vw - 24px);
+  }
+
+  .header-pill {
+    padding: 6px 6px 6px 14px;
+    gap: 12px;
+  }
+
+  .header-nav-list {
+    display: none;
+  }
+
+  .header-logo-img {
+    height: 26px;
+  }
+
+  .btn-business-design {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .btn-contact-us {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}

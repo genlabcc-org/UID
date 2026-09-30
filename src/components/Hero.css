@@ -1,0 +1,249 @@
+:root {
+  --color-cream: #eee7df;
+  --color-cream-soft: #fcf8f5;
+  --color-dark: #1f1d1d;
+  --color-red-primary: #ff1400;
+  --color-crimson: #d40f00;
+  --color-magenta: #d82878;
+  --color-purple: #941673;
+  --color-rose: #e34978;
+
+  --hero-frame-inset: clamp(8px, calc(2.5vw - 8px), 16px);
+  --border-radius-hero: 24px;
+
+  /* Font matching Program sections */
+  --font-articulat: 'Articulat CF', 'Articulatcf', -apple-system, BlinkMacSystemFont, 'Space Grotesk', sans-serif;
+  --font-display: var(--font-articulat);
+  --font-sans: var(--font-articulat);
+}
+
+/* ========================================================
+   PINNED HERO SECTION
+   ======================================================== */
+.hero-scroll-wrapper {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-cream);
+  z-index: 10;
+  isolation: isolate;
+}
+
+.hero-pin-section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding: var(--hero-frame-inset);
+  box-sizing: border-box;
+  background-color: var(--color-cream);
+  display: flex;
+}
+
+.hero-inner-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius-hero);
+  background-color: #d40f00;
+  box-shadow: 0 24px 60px -12px rgba(180, 20, 0, 0.35);
+  transform-origin: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================================
+   DYNAMIC 3D GRADIENT CANVAS & FILM NOISE
+   ======================================================== */
+.scene-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: #d40f00;
+}
+
+.webgl-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+.noise-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* ========================================================
+   HERO 2-STEP SCROLL CONTENT
+   ======================================================== */
+.hero-content-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  pointer-events: none;
+}
+
+/* Base Step Container */
+.hero-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 clamp(28px, 6.5vw, 110px);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* Step 1: Initial Headline (Visible First) */
+.hero-step-1 {
+  z-index: 11;
+  pointer-events: auto;
+}
+
+.hero-headline {
+  font-family: var(--font-articulat);
+  font-size: clamp(38px, 5.6vw, 78px);
+  font-weight: 600;
+  font-style: normal; /* No italics */
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  max-width: 980px;
+  margin: 0;
+  text-align: left;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Step 2: Emerges After Scrolling (Paragraph + CTAs) */
+.hero-step-2 {
+  z-index: 12;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-description {
+  font-family: var(--font-articulat);
+  font-size: clamp(18px, 1.5vw, 24px);
+  font-style: normal; /* No italics */
+  line-height: 1.6;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 760px;
+  margin: 0 0 clamp(24px, 3.2vw, 36px) 0;
+  text-align: left;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: normal;
+}
+
+/* CTA Buttons Container */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(14px, 2vw, 22px);
+  flex-wrap: wrap;
+  pointer-events: auto;
+}
+
+/* Primary CTA Button */
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  color: #141414;
+  font-family: var(--font-articulat);
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  border: none;
+}
+
+.hero-btn-primary .btn-arrow {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Secondary CTA Button */
+.hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 34px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-family: var(--font-articulat);
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border: none;
+}
+
+/* Lenis Integration Classes */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-headline {
+    font-size: 32px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    width: 100%;
+    padding: 14px 24px;
+  }
+
+  .hero-cta-group {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

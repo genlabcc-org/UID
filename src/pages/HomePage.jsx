@@ -1,5 +1,6 @@
+import Header from '../components/Header'
 import Hero from '../components/Hero'
-import JourneySection from '../components/JourneySection'
+import WhyUidSection from '../components/WhyUidSection'
 import ProgramsSection from '../components/ProgramsSection'
 import DTourSection from '../components/DTourSection'
 import ProgramDetailsSection from '../components/ProgramDetailsSection'
@@ -17,11 +18,14 @@ export default function HomePage() {
         flexDirection: 'column',
       }}
     >
+      {/* Floating Pill Header */}
+      <Header />
+
       {/* 1. Full-Screen Gradient Hero */}
       <Hero />
 
-      {/* 2. GSAP Smooth Pinned Scroll Sequence (Today -> I bridge -> the two.) */}
-      <JourneySection />
+      {/* 2. Section 2: Why UID is Different */}
+      <WhyUidSection />
 
       {/* 3. Section 3: Our Programs */}
       <ProgramsSection />

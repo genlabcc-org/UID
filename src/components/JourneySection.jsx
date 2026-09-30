@@ -295,6 +295,7 @@ export default function JourneySection() {
 
   return (
     <div
+      id="journey"
       ref={containerRef}
       style={{
         position: 'relative',
