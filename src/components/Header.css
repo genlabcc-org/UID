@@ -7,7 +7,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  width: auto;
+  width: max-content;
   max-width: calc(100vw - 32px);
   pointer-events: auto;
 }
@@ -16,10 +16,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(20px, 3.5vw, 44px);
-  padding: 6px 6px 6px clamp(18px, 2vw, 28px);
+  gap: clamp(14px, 2vw, 32px);
+  padding: 6px 6px 6px clamp(16px, 1.8vw, 24px);
   border-radius: 9999px;
   box-sizing: border-box;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
   transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -57,8 +59,8 @@
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  border: none;
+  box-shadow: none;
 }
 
 /* 2. Scrolled State (white pill background) */
@@ -91,7 +93,7 @@
 .header-pill-scrolled .header-right-capsule {
   background: linear-gradient(90deg, #050505 0%, #161616 60%, #303030 100%);
   border: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  box-shadow: none;
 }
 
 /* Brand Logo Styling */
@@ -116,14 +118,23 @@
   transition: filter 0.35s ease;
 }
 
-/* Middle Navigation Links */
+/* Middle Navigation Links (Single Line) */
 .header-nav-list {
   display: flex;
   align-items: center;
-  gap: clamp(16px, 2.4vw, 32px);
+  gap: clamp(12px, 1.8vw, 28px);
   list-style: none;
   margin: 0;
   padding: 0;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+.header-nav-list li {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap !important;
 }
 
 .header-nav-link {
@@ -131,13 +142,15 @@
   align-items: center;
   gap: 5px;
   font-family: 'Articulat CF', 'Articulatcf', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 15px;
+  font-size: clamp(13px, 1.1vw, 15px);
   font-weight: 500;
   text-decoration: none;
   letter-spacing: -0.01em;
-  padding: 8px 4px;
+  padding: 6px clamp(6px, 0.8vw, 10px);
   position: relative;
   cursor: pointer;
+  white-space: nowrap !important;
+  flex-shrink: 0;
   transition: color 0.25s ease, opacity 0.25s ease, transform 0.2s ease;
   background: transparent;
   border: none;
@@ -241,7 +254,7 @@
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.22s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
 }
 
 .btn-business-design:hover {

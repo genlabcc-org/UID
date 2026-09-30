@@ -6,31 +6,29 @@ import './Header.css';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
-  const [aboutOpen, setAboutOpen] = useState(false);
-  const [businessOpen, setBusinessOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // 1. Direct scroll evaluation: only switch color once Hero finishes and Journey section arrives
+    // 1. Direct scroll evaluation: only switch color once Hero finishes and Why UID section arrives
     const checkScroll = () => {
-      const journeyEl = document.getElementById('journey');
-      if (journeyEl) {
-        const rect = journeyEl.getBoundingClientRect();
+      const whyUidEl = document.getElementById('why-uid');
+      if (whyUidEl) {
+        const rect = whyUidEl.getBoundingClientRect();
         setIsScrolled(rect.top <= 80);
       } else {
-        setIsScrolled(window.scrollY > 2200);
+        setIsScrolled(window.scrollY > 800);
       }
     };
 
     window.addEventListener('scroll', checkScroll, { passive: true });
     checkScroll();
 
-    // 2. GSAP ScrollTrigger to ensure exact synchronization with pin release
+    // 2. GSAP ScrollTrigger to ensure exact synchronization with hero transition
     let trigger = null;
     const timeout = setTimeout(() => {
       trigger = ScrollTrigger.create({
-        trigger: '#journey',
+        trigger: '#why-uid',
         start: 'top 80px',
         onEnter: () => setIsScrolled(true),
         onLeaveBack: () => setIsScrolled(false),
@@ -89,15 +87,42 @@ export default function Header() {
             />
           </a>
 
-          {/* Middle: Desktop Navigation Links */}
+          {/* Middle: Desktop Navigation Links (Direct, no dropdowns) */}
           <ul className="header-nav-list">
+            <li>
+              <a
+                href="#why-uid"
+                onClick={(e) => handleSmoothScroll(e, '#why-uid')}
+                className="header-nav-link"
+              >
+                Why UID
+              </a>
+            </li>
             <li>
               <a
                 href="#programs"
                 onClick={(e) => handleSmoothScroll(e, '#programs')}
                 className="header-nav-link"
               >
-                Projects
+                Programs
+              </a>
+            </li>
+            <li>
+              <a
+                href="#dtour"
+                onClick={(e) => handleSmoothScroll(e, '#dtour')}
+                className="header-nav-link"
+              >
+                D.Tour
+              </a>
+            </li>
+            <li>
+              <a
+                href="#mentors"
+                onClick={(e) => handleSmoothScroll(e, '#mentors')}
+                className="header-nav-link"
+              >
+                Mentors
               </a>
             </li>
             <li>
@@ -106,111 +131,13 @@ export default function Header() {
                 onClick={(e) => handleSmoothScroll(e, '#program-details')}
                 className="header-nav-link"
               >
-                Services
+                Details
               </a>
-            </li>
-            <li
-              className={`header-dropdown-parent ${aboutOpen ? 'active' : ''}`}
-              onMouseEnter={() => setAboutOpen(true)}
-              onMouseLeave={() => setAboutOpen(false)}
-            >
-              <button
-                type="button"
-                className="header-nav-link"
-                onClick={() => setAboutOpen(!aboutOpen)}
-                aria-expanded={aboutOpen}
-              >
-                <span>About</span>
-                <svg
-                  className="nav-chevron-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-
-              {/* Dropdown Menu */}
-              <div className="header-dropdown-menu">
-                <a
-                  href="#why-uid"
-                  onClick={(e) => handleSmoothScroll(e, '#why-uid')}
-                  className="dropdown-item"
-                >
-                  Why UID is Different
-                </a>
-                <a
-                  href="#dtour"
-                  onClick={(e) => handleSmoothScroll(e, '#dtour')}
-                  className="dropdown-item"
-                >
-                  The D.Tour Experience
-                </a>
-                <a
-                  href="#programs"
-                  onClick={(e) => handleSmoothScroll(e, '#programs')}
-                  className="dropdown-item"
-                >
-                  Our Programs
-                </a>
-              </div>
             </li>
           </ul>
 
-          {/* Right: Dark Capsule Cluster */}
+          {/* Right: Dark Capsule Cluster (No business design menu) */}
           <div className="header-right-capsule">
-            {/* Business Design Dropdown (Desktop) */}
-            <div
-              className="header-dropdown-parent desktop-only-element"
-              onMouseEnter={() => setBusinessOpen(true)}
-              onMouseLeave={() => setBusinessOpen(false)}
-            >
-              <button
-                type="button"
-                className="btn-business-design"
-                onClick={() => setBusinessOpen(!businessOpen)}
-                aria-expanded={businessOpen}
-              >
-                <span>Business Design</span>
-                <svg
-                  className="nav-chevron-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-
-              {/* Dropdown Menu */}
-              <div className="header-dropdown-menu" style={{ left: '0', transform: 'none' }}>
-                <a
-                  href="#programs"
-                  onClick={(e) => handleSmoothScroll(e, '#programs')}
-                  className="dropdown-item"
-                >
-                  Design Engineering
-                </a>
-                <a
-                  href="#programs"
-                  onClick={(e) => handleSmoothScroll(e, '#programs')}
-                  className="dropdown-item"
-                >
-                  Visual Design Systems
-                </a>
-                <a
-                  href="#programs"
-                  onClick={(e) => handleSmoothScroll(e, '#programs')}
-                  className="dropdown-item"
-                >
-                  Film & Motion Direction
-                </a>
-              </div>
-            </div>
-
             {/* Contact Us Button */}
             <a
               href="#faq"
@@ -291,11 +218,18 @@ export default function Header() {
                 D.Tour Experience
               </a>
               <a
+                href="#mentors"
+                onClick={(e) => handleSmoothScroll(e, '#mentors')}
+                className="mobile-nav-item"
+              >
+                Mentors
+              </a>
+              <a
                 href="#program-details"
                 onClick={(e) => handleSmoothScroll(e, '#program-details')}
                 className="mobile-nav-item"
               >
-                Program Details &amp; Mentors
+                Program Details
               </a>
               <a
                 href="#faq"

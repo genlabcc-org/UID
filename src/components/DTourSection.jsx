@@ -95,9 +95,10 @@ export default function DTourSection() {
                   textDecoration: 'none',
                   padding: '14px 32px',
                   borderRadius: '999px',
+                  border: 'none',
+                  boxShadow: 'none',
                   cursor: 'pointer',
                   transition: 'background-color 0.2s ease, transform 0.2s ease',
-                  boxShadow: '0 4px 14px rgba(20, 20, 20, 0.1)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#2c2c2c'

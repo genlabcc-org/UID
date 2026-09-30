@@ -188,9 +188,8 @@ export default function ProgramDetailsSection() {
                   borderRadius: '999px',
                   backgroundColor: isSelected ? '#141414' : 'transparent',
                   color: isSelected ? '#ffffff' : '#141414',
-                  border: isSelected
-                    ? '1px solid #141414'
-                    : '1px solid rgba(20, 20, 20, 0.16)',
+                  border: 'none',
+                  boxShadow: 'none',
                   cursor: 'pointer',
                   fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
                   fontSize: '15px',
@@ -493,6 +492,8 @@ export default function ProgramDetailsSection() {
                     textDecoration: 'none',
                     padding: '14px 34px',
                     borderRadius: '999px',
+                    border: 'none',
+                    boxShadow: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
                   }}
