@@ -66,7 +66,7 @@ export default function DTourSection() {
             <h2
               style={{
                 fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                fontSize: 'clamp(42px, 5.5vw, 76px)',
+                fontSize: 'clamp(32px, 6vw, 76px)',
                 fontWeight: 700,
                 lineHeight: 1.08,
                 letterSpacing: '-0.03em',
@@ -90,10 +90,10 @@ export default function DTourSection() {
                   backgroundColor: '#141414',
                   color: '#ffffff',
                   fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                  fontSize: '17px',
+                  fontSize: '16px',
                   fontWeight: 500,
                   textDecoration: 'none',
-                  padding: '16px 36px',
+                  padding: '14px 32px',
                   borderRadius: '999px',
                   cursor: 'pointer',
                   transition: 'background-color 0.2s ease, transform 0.2s ease',
@@ -126,12 +126,12 @@ export default function DTourSection() {
             <h3
               style={{
                 fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                fontSize: 'clamp(24px, 2.5vw, 34px)',
+                fontSize: 'clamp(20px, 2.5vw, 34px)',
                 fontWeight: 600,
                 lineHeight: 1.25,
                 letterSpacing: '-0.02em',
                 color: '#141414',
-                margin: '0 0 22px 0',
+                margin: '0 0 18px 0',
                 padding: 0,
                 textAlign: 'start',
               }}
@@ -143,8 +143,8 @@ export default function DTourSection() {
             <p
               style={{
                 fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                fontSize: '20px',
-                lineHeight: '32px',
+                fontSize: 'clamp(15px, 1.4vw, 20px)',
+                lineHeight: '1.6',
                 fontWeight: 400,
                 letterSpacing: 'normal',
                 wordSpacing: '0px',

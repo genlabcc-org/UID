@@ -56,7 +56,7 @@ export default function Hero() {
           scrollTrigger: {
             trigger: heroPinContainerRef.current,
             start: 'top top',
-            end: '+=2400',
+            end: () => (window.innerWidth <= 768 ? '+=1200' : '+=2400'),
             pin: true,
             pinSpacing: true,
             scrub: 0.8,

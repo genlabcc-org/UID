@@ -226,24 +226,44 @@ html.lenis, html.lenis body {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .hero-pin-section {
+    padding: 8px;
+  }
+
+  .hero-inner-frame {
+    border-radius: 16px;
+  }
+
+  .hero-step {
+    padding: 0 18px;
+    justify-content: center;
+  }
+
   .hero-headline {
-    font-size: 32px;
+    font-size: clamp(26px, 7.5vw, 36px);
+    line-height: 1.18;
   }
 
   .hero-description {
-    font-size: 16px;
-    margin-bottom: 24px;
-  }
-
-  .hero-btn-primary,
-  .hero-btn-secondary {
-    width: 100%;
-    padding: 14px 24px;
+    font-size: clamp(14px, 4vw, 16px);
+    line-height: 1.55;
+    margin-bottom: 20px;
+    max-width: 100%;
   }
 
   .hero-cta-group {
     width: 100%;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: center;
   }
 }

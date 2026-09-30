@@ -1,3 +1,5 @@
+import './ProgramsSection.css'
+
 const programs = [
   {
     id: '01',
@@ -81,7 +83,7 @@ export default function ProgramsSection() {
           <h2
             style={{
               fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-              fontSize: 'clamp(36px, 5vw, 68px)',
+              fontSize: 'clamp(32px, 4.5vw, 68px)',
               fontWeight: 600,
               lineHeight: 1.1,
               letterSpacing: 'normal',
@@ -98,11 +100,10 @@ export default function ProgramsSection() {
           <p
             style={{
               fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-              fontSize: '20px',
-              lineHeight: '30px',
+              fontSize: 'clamp(16px, 1.4vw, 20px)',
+              lineHeight: '1.55',
               fontWeight: 400,
               letterSpacing: 'normal',
-              wordSpacing: '0px',
               color: '#505050',
               margin: '0px',
               padding: '0px',
@@ -114,33 +115,12 @@ export default function ProgramsSection() {
           </p>
         </div>
 
-        {/* ── Programs Grid (Single line 3-column layout) ── */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-            gap: 'clamp(20px, 2.5vw, 40px)',
-            width: '100%',
-          }}
-        >
+        {/* ── Programs Grid (Responsive via ProgramsSection.css) ── */}
+        <div className="programs-grid">
           {programs.map((program) => (
-            <article
-              key={program.id}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              {/* 1. Large Static Image Frame (No border radius) */}
-              <div
-                style={{
-                  width: '100%',
-                  aspectRatio: '1 / 1',
-                  borderRadius: '0px',
-                  overflow: 'hidden',
-                  backgroundColor: '#e6ded4',
-                }}
-              >
+            <article key={program.id} className="program-card">
+              {/* 1. Large Static Image Frame */}
+              <div className="program-image-frame">
                 <img
                   src={program.image}
                   alt={program.title}
@@ -154,52 +134,14 @@ export default function ProgramsSection() {
               </div>
 
               {/* 2. Text Content Below Image */}
-              <div style={{ paddingTop: '16px' }}>
+              <div className="program-card-content">
                 {/* Title */}
-                <h3
-                  style={{
-                    color: '#141414',
-                    backgroundColor: 'transparent',
-                    fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                    fontSize: '28px',
-                    lineHeight: '35.28px',
-                    verticalAlign: 'baseline',
-                    letterSpacing: 'normal',
-                    wordSpacing: '0px',
-                    margin: '0px 0px 6px 0px',
-                    padding: '0px',
-                    fontWeight: 500,
-                    fontStyle: 'normal',
-                    fontVariant: 'normal',
-                    fontKerning: 'auto',
-                    fontOpticalSizing: 'auto',
-                    fontStretch: '100%',
-                    textTransform: 'none',
-                    textDecoration: 'none',
-                    textAlign: 'start',
-                    textIndent: '0px',
-                  }}
-                >
+                <h3 className="program-card-title">
                   {program.title}
                 </h3>
 
-                {/* Accent Tag Line with Icon (Matching Orange Tag in Screenshot) */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '7px',
-                    color: '#ff6230',
-                    fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                    fontSize: '15px',
-                    lineHeight: '22px',
-                    fontWeight: 500,
-                    letterSpacing: 'normal',
-                    margin: '0px 0px 10px 0px',
-                    padding: '0px',
-                  }}
-                >
-                  {/* Subtle Orange Icon */}
+                {/* Accent Tag Line with Icon */}
+                <div className="program-card-tags">
                   <svg
                     width="15"
                     height="15"
@@ -217,30 +159,7 @@ export default function ProgramsSection() {
                 </div>
 
                 {/* Description */}
-                <p
-                  style={{
-                    color: '#505050',
-                    backgroundColor: 'transparent',
-                    fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                    fontSize: '20px',
-                    lineHeight: '30px',
-                    verticalAlign: 'baseline',
-                    letterSpacing: 'normal',
-                    wordSpacing: '0px',
-                    margin: '0px',
-                    padding: '0px',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    fontVariant: 'normal',
-                    fontKerning: 'auto',
-                    fontOpticalSizing: 'auto',
-                    fontStretch: '100%',
-                    textTransform: 'none',
-                    textDecoration: 'none',
-                    textAlign: 'start',
-                    textIndent: '0px',
-                  }}
-                >
+                <p className="program-card-desc">
                   {program.description}
                 </p>
               </div>
@@ -251,3 +170,4 @@ export default function ProgramsSection() {
     </section>
   )
 }
+

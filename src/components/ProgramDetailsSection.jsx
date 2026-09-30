@@ -133,7 +133,7 @@ export default function ProgramDetailsSection() {
           <h2
             style={{
               fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-              fontSize: 'clamp(36px, 5vw, 68px)',
+              fontSize: 'clamp(30px, 5vw, 68px)',
               fontWeight: 600,
               lineHeight: 1.1,
               letterSpacing: 'normal',
@@ -148,11 +148,10 @@ export default function ProgramDetailsSection() {
           <p
             style={{
               fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-              fontSize: '20px',
-              lineHeight: '30px',
+              fontSize: 'clamp(16px, 1.4vw, 20px)',
+              lineHeight: '1.55',
               fontWeight: 400,
               letterSpacing: 'normal',
-              wordSpacing: '0px',
               color: '#505050',
               margin: 0,
               padding: 0,
@@ -282,8 +281,8 @@ export default function ProgramDetailsSection() {
               <h3
                 style={{
                   fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                  fontSize: '28px',
-                  lineHeight: '35.28px',
+                  fontSize: 'clamp(22px, 2.2vw, 28px)',
+                  lineHeight: 1.25,
                   fontWeight: 500,
                   color: '#141414',
                   margin: '0 0 8px 0',
@@ -299,8 +298,8 @@ export default function ProgramDetailsSection() {
                 href={currentProgram.venueLink}
                 style={{
                   fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                  fontSize: '20px',
-                  lineHeight: '30px',
+                  fontSize: 'clamp(15px, 1.4vw, 19px)',
+                  lineHeight: '26px',
                   fontWeight: 400,
                   color: '#505050',
                   textDecoration: 'underline',
@@ -335,7 +334,7 @@ export default function ProgramDetailsSection() {
               <div
                 style={{
                   display: 'flex',
-                  gap: 'clamp(20px, 3vw, 36px)',
+                  gap: 'clamp(16px, 3vw, 36px)',
                   flexWrap: 'wrap',
                 }}
               >
@@ -345,6 +344,7 @@ export default function ProgramDetailsSection() {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
+                      flex: '1 1 130px',
                       maxWidth: '170px',
                     }}
                   >

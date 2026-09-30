@@ -1,3 +1,5 @@
+import './WhyUidSection.css';
+
 const pillars = [
   {
     num: '01',
@@ -81,31 +83,18 @@ export default function WhyUidSection() {
             Section: 2 (Why UID is Different)
           </div>
 
-          {/* Large Punchy Headline strictly in 2 lines */}
-          <h2
-            style={{
-              fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-              fontSize: 'clamp(28px, 3.8vw, 54px)',
-              fontWeight: 600,
-              lineHeight: 1.15,
-              letterSpacing: '-0.02em',
-              color: '#141414',
-              margin: '0 0 clamp(16px, 2.2vw, 24px) 0',
-              padding: '0px',
-              textAlign: 'start',
-              maxWidth: '100%',
-            }}
-          >
-            <span style={{ display: 'inline-block' }}>No long lectures. No recorded videos.</span>
+          {/* Large Punchy Headline strictly in 2 lines on desktop, wraps cleanly on mobile */}
+          <h2 className="why-uid-headline">
+            <span className="headline-line-1">No long lectures. No recorded videos.</span>
             <br />
-            <span style={{ display: 'inline-block' }}>No boring.</span>
+            <span className="headline-line-2">No boring.</span>
           </h2>
 
           {/* Subtitle / Lead Paragraph */}
           <p
             style={{
               fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-              fontSize: 'clamp(17px, 1.4vw, 20px)',
+              fontSize: 'clamp(16px, 1.4vw, 20px)',
               lineHeight: '1.55',
               fontWeight: 400,
               letterSpacing: 'normal',
@@ -122,16 +111,7 @@ export default function WhyUidSection() {
         </div>
 
         {/* ── 4 Pillars Grid (Minimalist Editorial Columns — No Boxes) ── */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: 'clamp(28px, 4vw, 56px)',
-            width: '100%',
-            borderTop: '1px solid rgba(20, 20, 20, 0.16)',
-            paddingTop: 'clamp(36px, 4.5vw, 56px)',
-          }}
-        >
+        <div className="why-uid-pillars-grid">
           {pillars.map((item) => (
             <div
               key={item.num}

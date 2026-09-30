@@ -1,0 +1,75 @@
+/* ========================================================
+   PROGRAMS SECTION (SECTION 3) RESPONSIVE STYLES
+   ======================================================== */
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.5vw, 40px);
+  width: 100%;
+}
+
+.program-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.program-image-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0px;
+  overflow: hidden;
+  background-color: #e6ded4;
+}
+
+.program-card-content {
+  padding-top: 16px;
+}
+
+.program-card-title {
+  color: #141414;
+  background-color: transparent;
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.25;
+  margin: 0 0 6px 0;
+  padding: 0;
+  font-weight: 500;
+  text-align: start;
+}
+
+.program-card-tags {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #ff6230;
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(13px, 1.2vw, 15px);
+  line-height: 1.45;
+  font-weight: 500;
+  margin: 0 0 10px 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.program-card-desc {
+  color: #505050;
+  background-color: transparent;
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(15px, 1.35vw, 19px);
+  line-height: 1.55;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  text-align: start;
+}
+
+@media (max-width: 860px) {
+  .programs-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .program-image-frame {
+    max-height: 380px;
+  }
+}

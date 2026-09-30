@@ -1,0 +1,48 @@
+/* ========================================================
+   WHY UID SECTION RESPONSIVE STYLES
+   ======================================================== */
+.why-uid-headline {
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(26px, 3.8vw, 54px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #141414;
+  margin: 0 0 clamp(16px, 2.2vw, 24px) 0;
+  padding: 0;
+  text-align: start;
+  max-width: 100%;
+}
+
+.why-uid-headline .headline-line-1 {
+  display: inline-block;
+}
+
+.why-uid-headline .headline-line-2 {
+  display: inline-block;
+}
+
+.why-uid-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(28px, 4vw, 56px);
+  width: 100%;
+  border-top: 1px solid rgba(20, 20, 20, 0.16);
+  padding-top: clamp(36px, 4.5vw, 56px);
+}
+
+@media (max-width: 680px) {
+  .why-uid-headline .headline-line-1 {
+    display: inline;
+  }
+  
+  .why-uid-headline .headline-line-2 {
+    display: inline;
+  }
+
+  .why-uid-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 28px;
+  }
+}

@@ -114,7 +114,7 @@ export default function Footer() {
           borderRadius: '26px',
           overflow: 'hidden',
           position: 'relative',
-          padding: 'clamp(46px, 5.8vw, 78px) clamp(28px, 4.5vw, 64px) clamp(38px, 4.8vw, 54px)',
+          padding: 'clamp(36px, 5.8vw, 78px) clamp(20px, 4vw, 64px) clamp(32px, 4.8vw, 54px)',
           boxSizing: 'border-box',
           boxShadow: '0 12px 40px rgba(0, 0, 0, 0.06)',
           background: `
@@ -141,11 +141,11 @@ export default function Footer() {
             }}
           >
             {/* Left Main Headline — Strictly 3 lines */}
-            <div style={{ maxWidth: '680px', flex: '1 1 380px' }}>
+            <div style={{ maxWidth: '680px', flex: '1 1 260px' }}>
               <h2
                 style={{
                   fontFamily: "'Space Grotesk', sans-serif",
-                  fontSize: 'clamp(22px, 3.2vw, 44px)',
+                  fontSize: 'clamp(20px, 3.2vw, 44px)',
                   fontWeight: 600,
                   lineHeight: 1.18,
                   letterSpacing: '-0.03em',
@@ -153,13 +153,13 @@ export default function Footer() {
                   margin: 0,
                 }}
               >
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
+                <span style={{ display: 'block' }}>
                   Open to joining
                 </span>
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
+                <span style={{ display: 'block' }}>
                   a creative team
                 </span>
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
+                <span style={{ display: 'block' }}>
                   Apprenticeship · October 2026
                 </span>
               </h2>
