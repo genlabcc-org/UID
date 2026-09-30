@@ -76,7 +76,7 @@ export default function ProgramsSection() {
                 display: 'inline-block',
               }}
             />
-            Section: 3 (our program)
+            Our Programs
           </div>
 
           {/* Headline */}

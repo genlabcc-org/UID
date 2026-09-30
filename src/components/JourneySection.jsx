@@ -419,7 +419,7 @@ export default function JourneySection() {
               fontKerning: 'none',
             }}
           >
-            {'Today'.split('').map((char, i) => (
+            {'Reset.'.split('').map((char, i) => (
               <span
                 key={i}
                 className="char-today"
@@ -452,7 +452,7 @@ export default function JourneySection() {
               fontKerning: 'none',
             }}
           >
-            {'I bridge'.split('').map((char, i) => (
+            {'Rewire.'.split('').map((char, i) => (
               <span
                 key={i}
                 className="char-bridge"
@@ -486,7 +486,7 @@ export default function JourneySection() {
               fontKerning: 'none',
             }}
           >
-            {'the two.'.split('').map((char, i) => (
+            {'Release.'.split('').map((char, i) => (
               <span
                 key={i}
                 className="char-two-solid"
@@ -523,7 +523,7 @@ export default function JourneySection() {
               willChange: 'opacity',
             }}
           >
-            {'the two.'.split('').map((char, i) => (
+            {'Release.'.split('').map((char, i) => (
               <span
                 key={i}
                 className="char-two-outline"

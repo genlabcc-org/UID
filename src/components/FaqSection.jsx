@@ -80,7 +80,7 @@ export default function FaqSection() {
                 display: 'inline-block',
               }}
             />
-            Section: 9 ( FAQ)
+            FAQ
           </div>
 
           {/* Headline */}

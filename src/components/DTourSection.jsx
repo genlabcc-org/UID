@@ -40,7 +40,7 @@ export default function DTourSection() {
               display: 'inline-block',
             }}
           />
-          Section: 4 (D.Tour )
+          D.Tour
         </div>
 
         {/* ── Two Column Editorial Grid (Matching Reference Layout) ── */}

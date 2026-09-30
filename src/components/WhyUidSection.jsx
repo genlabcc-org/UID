@@ -80,7 +80,7 @@ export default function WhyUidSection() {
                 display: 'inline-block',
               }}
             />
-            Section: 2 (Why UID is Different)
+            Why UID is Different
           </div>
 
           {/* Large Punchy Headline strictly in 2 lines on desktop, wraps cleanly on mobile */}

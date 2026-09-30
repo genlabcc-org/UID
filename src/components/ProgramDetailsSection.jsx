@@ -125,7 +125,7 @@ export default function ProgramDetailsSection() {
               display: 'inline-block',
             }}
           />
-          Section: 6 (Program Details)
+          Program Details
         </div>
 
         {/* Section Headline & Subtitle */}

@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import JourneySection from '../components/JourneySection'
 import ProgramsSection from '../components/ProgramsSection'
 import WhyUidSection from '../components/WhyUidSection'
+import MentorsSection from '../components/MentorsSection'
 import DTourSection from '../components/DTourSection'
 import ProgramDetailsSection from '../components/ProgramDetailsSection'
 import FaqSection from '../components/FaqSection'
@@ -22,28 +23,31 @@ export default function HomePage() {
       {/* Floating Pill Header */}
       <Header />
 
-      {/* 1. Full-Screen Gradient Hero */}
+      {/* 1. Hero Section */}
       <Hero />
 
-      {/* 2. GSAP Smooth Pinned Scroll Sequence (Today -> I bridge -> the two.) */}
-      <JourneySection />
-
-      {/* 3. Section 3: Our Programs */}
-      <ProgramsSection />
-      {/* 2. Section 2: Why UID is Different */}
+      {/* 2. Why UID is Different */}
       <WhyUidSection />
 
+      {/* 3. Our Programs */}
+      <ProgramsSection />
 
-      {/* 4. Section 4: D.Tour */}
+      {/* 4. D.Tour */}
       <DTourSection />
 
-      {/* 5. Section 6: Program Details */}
+      {/* 5. Meet Our Mentors */}
+      <MentorsSection />
+
+      {/* 6. Program Details */}
       <ProgramDetailsSection />
 
-      {/* 6. Section 9: FAQ */}
+      {/* 7. Reset. Rewire. Release (Pinned GSAP Sequence) */}
+      <JourneySection />
+
+      {/* 8. FAQ */}
       <FaqSection />
 
-      {/* 7. Reference-Matched Gradient Card Footer */}
+      {/* 9. Footer */}
       <Footer />
     </div>
   )

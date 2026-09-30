@@ -1,0 +1,135 @@
+/* ==========================================================================
+   MENTORS SECTION (2 BIG IMAGES IN SINGLE LINE)
+   ========================================================================== */
+
+.mentors-section {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #eee7df;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(60px, 8vw, 110px) 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.mentors-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0 clamp(20px, 4.5vw, 64px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mentors-header {
+  margin-bottom: clamp(36px, 5vw, 56px);
+  max-width: 100%;
+}
+
+.mentors-headline {
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(32px, 4.5vw, 64px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #141414;
+  margin: 0 0 14px 0;
+  padding: 0;
+}
+
+.mentors-subtitle {
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.55;
+  font-weight: 400;
+  color: #505050;
+  margin: 0;
+}
+
+/* ── 2 Big Cards in a Single Row (Matching Mellow Reference) ── */
+.mentors-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+  width: 100%;
+}
+
+.mentor-big-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Big Image Frame */
+.mentor-big-image-frame {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background-color: #e5ded5;
+  border-radius: 0px;
+  overflow: hidden;
+  position: relative;
+}
+
+.mentor-big-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+/* Content Below Image */
+.mentor-big-content {
+  padding-top: clamp(16px, 2.2vw, 24px);
+  display: flex;
+  flex-direction: column;
+}
+
+.mentor-big-name {
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(26px, 2.6vw, 38px);
+  font-weight: 500;
+  line-height: 1.2;
+  color: #141414;
+  margin: 0 0 8px 0;
+}
+
+.mentor-big-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff6230;
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 22px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.mentor-big-desc {
+  font-family: 'Articulat CF', 'Articulatcf', sans-serif;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.55;
+  font-weight: 400;
+  color: #505050;
+  margin: 0;
+}
+
+/* ── Mobile Responsive Stack ── */
+@media (max-width: 820px) {
+  .mentors-section {
+    min-height: auto;
+    padding: 60px 0;
+  }
+
+  .mentors-grid-2col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .mentor-big-image-frame {
+    aspect-ratio: 4 / 3;
+  }
+}
