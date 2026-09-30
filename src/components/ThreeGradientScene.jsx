@@ -1,17 +1,17 @@
 import { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const ThreeGradientScene = forwardRef(function ThreeGradientScene(
   {
     interactive = true,
     parallaxStrength = 0.35,
     noiseOpacity = 0.045,
-    children,
   },
   ref
 ) {
-  const containerRef = useRef(null);
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
   const scrollRef = useRef({ progress: 0, velocity: 0 });
 
   // Expose setScroll directly to avoid triggering React re-renders on scroll
@@ -23,21 +23,22 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
   }));
 
   useEffect(() => {
-    const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!container || !canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+
+    // 1. Three.js Scene Setup
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#d40f00'); // Instant rich base color
 
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
 
-    // 1. Camera Setup
+    // 2. Camera Setup (fov: 35, position: [0, 0, 6])
     const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
     camera.position.set(0, 0, 6);
 
-    // 2. Scene & WebGL Renderer
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#d40f00'); // Base vibrant crimson
-
+    // 3. WebGL Renderer
     const renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
@@ -51,7 +52,7 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
 
-    // 3. Load Equirectangular Scene Texture
+    // 4. Load Equirectangular Scene Texture
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load(
       '/textures/scene-gradient.webp',
@@ -76,7 +77,134 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
       }
     );
 
-    // 4. Mouse & Parallax State
+    // 5. Lighting Setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
+    dirLight.position.set(3, 5, 4);
+    scene.add(dirLight);
+
+    const pinkBackLight = new THREE.DirectionalLight(0xff4477, 0.6);
+    pinkBackLight.position.set(-3, -2, -4);
+    scene.add(pinkBackLight);
+
+    // 6. Central 3D Logo Group
+    const logoGroup = new THREE.Group();
+    scene.add(logoGroup);
+
+    const createFallbackLogo = () => {
+      const geom = new THREE.TorusKnotGeometry(0.4, 0.12, 128, 32, 2, 3);
+      const mat = new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color('#ff5577'),
+        metalness: 0.95,
+        roughness: 0.35,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.15,
+        reflectivity: 1.0,
+      });
+      return new THREE.Mesh(geom, mat);
+    };
+
+    let fallbackLogo = createFallbackLogo();
+    logoGroup.add(fallbackLogo);
+
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load(
+      '/models/logo.glb',
+      (gltf) => {
+        const model = gltf.scene;
+        model.traverse((child) => {
+          if (child.isMesh) {
+            child.material = new THREE.MeshPhysicalMaterial({
+              color: new THREE.Color('#ffffff'),
+              metalness: 0.95,
+              roughness: 0.35,
+              clearcoat: 0.8,
+              clearcoatRoughness: 0.2,
+              reflectivity: 1.0,
+            });
+          }
+        });
+
+        const box = new THREE.Box3().setFromObject(model);
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 1.0 / (maxDim || 1);
+        model.scale.setScalar(scale);
+
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center.multiplyScalar(scale));
+
+        if (fallbackLogo) {
+          logoGroup.remove(fallbackLogo);
+          fallbackLogo.geometry.dispose();
+          fallbackLogo.material.dispose();
+          fallbackLogo = null;
+        }
+
+        logoGroup.add(model);
+      },
+      undefined,
+      (err) => {
+        console.warn('GLTF load fallback:', err);
+      }
+    );
+
+    // 7. Typography in 3D Space
+    const createTextPlane = (texturePath, w, h, posX, posY, posZ, rotY) => {
+      const tex = textureLoader.load(texturePath);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      const geom = new THREE.PlaneGeometry(w, h);
+      const mat = new THREE.MeshBasicMaterial({
+        map: tex,
+        transparent: true,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+      });
+      const mesh = new THREE.Mesh(geom, mat);
+      mesh.position.set(posX, posY, posZ);
+      mesh.rotation.y = rotY;
+      scene.add(mesh);
+      return mesh;
+    };
+
+    // Text 1: "guillaume zhu" (Initial view facing Z)
+    const textNameMesh = createTextPlane(
+      '/textures/texts/text-name.webp',
+      11.0,
+      2.8,
+      0,
+      0,
+      -2.5,
+      0
+    );
+
+    // Text 2: "art director" (Orbit view facing -X)
+    const textArtDirectorMesh = createTextPlane(
+      '/textures/texts/text-art-director.webp',
+      5.5 * 0.85,
+      1.4 * 0.85,
+      1.0,
+      5.25,
+      -1.75,
+      -Math.PI * 0.5
+    );
+    textArtDirectorMesh.material.opacity = 0;
+
+    // Text 3: "creative developer" (Orbit view facing -X)
+    const textCreativeDevMesh = createTextPlane(
+      '/textures/texts/text-creative-developer.webp',
+      5.5 * 0.65,
+      1.4 * 0.65,
+      -1.0,
+      6.5,
+      1.25,
+      -Math.PI * 0.5
+    );
+    textCreativeDevMesh.material.opacity = 0;
+
+    // 8. Mouse & Parallax State
     const mouseState = {
       targetX: 0,
       targetY: 0,
@@ -95,16 +223,22 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    // 5. Resize Handling
+    // 9. Resize Handling
     const handleResize = () => {
       if (!container || !renderer || !camera) return;
       const w = container.clientWidth || window.innerWidth;
       const h = container.clientHeight || window.innerHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
-
       renderer.setSize(w, h, false);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const dist = camera.position.distanceTo(textNameMesh.position);
+      const fovRad = THREE.MathUtils.degToRad(camera.fov);
+      const visibleHeight = 2 * dist * Math.tan(fovRad * 0.5);
+      const visibleWidth = visibleHeight * camera.aspect;
+      const targetScale = Math.min(1, (visibleWidth * 0.85) / 11.0);
+      textNameMesh.scale.setScalar(targetScale);
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
@@ -112,15 +246,20 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
     window.addEventListener('resize', handleResize);
     handleResize();
 
-    // 6. Animation Loop (Camera Orbit & Mouse Parallax)
+    // 10. Animation & Render Loop
     let animId = null;
+    let lastTime = performance.now();
 
-    const renderLoop = () => {
+    const renderLoop = (time) => {
+      const delta = Math.min((time - lastTime) / 1000, 0.1);
+      lastTime = time;
+
       // Mouse lerp
       mouseState.currentX += (mouseState.targetX - mouseState.currentX) * 0.08;
       mouseState.currentY += (mouseState.targetY - mouseState.currentY) * 0.08;
 
       const p = THREE.MathUtils.clamp(scrollRef.current.progress, 0, 1);
+      const vel = Math.abs(scrollRef.current.velocity);
 
       // Camera Orbit & Rise calculation
       const targetHeight = p * 6.0;
@@ -135,6 +274,22 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
       camera.position.z = baseCamZ + Math.sin(perpAngle) * mouseState.currentX * 0.6;
       camera.position.y = targetHeight + mouseState.currentY * 0.4;
       camera.lookAt(0, targetHeight, 0);
+
+      // 3D Logo floats with height and spins continuously on tilted axis
+      logoGroup.position.y = targetHeight;
+      const spinSpeed = 0.25 + THREE.MathUtils.clamp(vel * 0.002, 0, 1.5);
+      logoGroup.rotateOnAxis(new THREE.Vector3(0.2, 1.0, 0.1).normalize(), delta * spinSpeed);
+
+      // 1. Text: "guillaume zhu" translates down and fades out between 0.15 and 0.45
+      const nameOpacity = 1.0 - THREE.MathUtils.smoothstep(p, 0.15, 0.45);
+      textNameMesh.material.opacity = nameOpacity;
+      textNameMesh.position.y = -p * 2.8;
+
+      // 2. Texts: "art director" and "creative developer" emerge between 0.45 and 0.75
+      // and remain 100% visible and settled from 0.75 to 1.0
+      const emergeOpacity = THREE.MathUtils.smoothstep(p, 0.45, 0.75);
+      textArtDirectorMesh.material.opacity = emergeOpacity;
+      textCreativeDevMesh.material.opacity = emergeOpacity;
 
       renderer.render(scene, camera);
       animId = requestAnimationFrame(renderLoop);
@@ -153,10 +308,7 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
 
   return (
     <div ref={containerRef} className="scene-container">
-      {/* Background 3D Equirectangular Gradient Canvas */}
       <canvas ref={canvasRef} className="webgl-canvas" />
-
-      {/* Noise Texture */}
       {noiseOpacity > 0 && (
         <div
           className="noise-layer"
@@ -164,9 +316,6 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
           aria-hidden="true"
         />
       )}
-
-      {/* Middle Content Overlay */}
-      {children}
     </div>
   );
 });
