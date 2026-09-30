@@ -20,9 +20,9 @@ function HeavyGrain() {
       const r1 = Math.random()
       const r2 = Math.random()
       const val = Math.floor(((r1 + r2) / 2) * 255)
-      
+
       const contrast = val > 128 ? Math.min(255, val + 32) : Math.max(0, val - 32)
-      
+
       data[i] = contrast
       data[i + 1] = contrast
       data[i + 2] = contrast
@@ -45,7 +45,7 @@ function HeavyGrain() {
           backgroundImage: `url(${grainUrl})`,
           backgroundRepeat: 'repeat',
           mixBlendMode: 'overlay',
-          opacity: 0.65,
+          opacity: 0.52,
           pointerEvents: 'none',
           zIndex: 1,
         }}
@@ -58,7 +58,7 @@ function HeavyGrain() {
           backgroundImage: `url(${grainUrl})`,
           backgroundRepeat: 'repeat',
           mixBlendMode: 'color-burn',
-          opacity: 0.26,
+          opacity: 0.20,
           pointerEvents: 'none',
           zIndex: 1,
         }}
@@ -71,7 +71,7 @@ function HeavyGrain() {
           backgroundImage: `url(${grainUrl})`,
           backgroundRepeat: 'repeat',
           mixBlendMode: 'screen',
-          opacity: 0.20,
+          opacity: 0.15,
           pointerEvents: 'none',
           zIndex: 1,
         }}
@@ -94,8 +94,8 @@ export default function Footer() {
   const exploreLinks = ['Journey', 'Toolkit', 'Projects', 'Playground', 'Contact']
   const contactLinks = [
     { label: 'LinkedIn', href: 'https://linkedin.com' },
-    { label: 'GitHub',   href: 'https://github.com' },
-    { label: 'Email',    href: 'mailto:contact@uid.design' },
+    { label: 'GitHub', href: 'https://github.com' },
+    { label: 'Email', href: 'mailto:contact@uid.design' },
   ]
 
   return (

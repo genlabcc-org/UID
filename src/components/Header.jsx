@@ -69,9 +69,8 @@ export default function Header() {
     <>
       <header className="site-header-container" aria-label="Main Navigation">
         <nav
-          className={`header-pill ${
-            isScrolled ? 'header-pill-scrolled' : 'header-pill-transparent'
-          }`}
+          className={`header-pill ${isScrolled ? 'header-pill-scrolled' : 'header-pill-transparent'
+            }`}
         >
           {/* Left: Brand Logo from public/logo.png */}
           <a
