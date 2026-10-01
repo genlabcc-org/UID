@@ -128,7 +128,8 @@ export default function WhyUidSection() {
                 className="why-uid-card-wrapper"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                style={{ height: '100%' }}
+                onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
+                style={{ height: '100%', cursor: 'pointer' }}
               >
                 {/* Background colored layer — peeks out from behind on hover */}
                 <div
@@ -146,73 +147,70 @@ export default function WhyUidSection() {
                   }}
                 />
 
-                {/* 3 sparkle rays — top-right, fanning from one origin */}
+                {/* 3 sparkle dashes on the side — exact match to reference photo */}
                 <div
+                  className="why-uid-sparkle-dashes"
                   style={{
-                    position: 'absolute',
-                    top: '-28px',
-                    right: '16px',
-                    zIndex: 3,
-                    pointerEvents: 'none',
                     opacity: isActive ? 1 : 0,
-                    transition: 'opacity 0.25s ease',
-                    transitionDelay: isActive ? '0.08s' : '0s',
+                    transition: 'opacity 0.2s ease',
                   }}
                 >
-                  {/* Left ray  \  — angled far left */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: '0',
-                      right: '14px',
-                      width: '5px',
-                      height: '18px',
-                      borderRadius: '3px',
-                      backgroundColor: '#f0b429',
-                      transform: isActive
-                        ? 'rotate(-35deg) scaleY(1)'
-                        : 'rotate(-35deg) scaleY(0)',
-                      transformOrigin: 'center bottom',
-                      transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                      transitionDelay: isActive ? '0.1s' : '0s',
-                    }}
-                  />
-                  {/* Middle ray — slight lean right */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: '0',
-                      right: '4px',
-                      width: '5px',
-                      height: '20px',
-                      borderRadius: '3px',
-                      backgroundColor: '#f0b429',
-                      transform: isActive
-                        ? 'rotate(5deg) scaleY(1)'
-                        : 'rotate(5deg) scaleY(0)',
-                      transformOrigin: 'center bottom',
-                      transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                      transitionDelay: isActive ? '0.18s' : '0s',
-                    }}
-                  />
-                  {/* Right ray  / — angled far right */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: '4px',
-                      right: '-8px',
-                      width: '5px',
-                      height: '18px',
-                      borderRadius: '3px',
-                      backgroundColor: '#f0b429',
-                      transform: isActive
-                        ? 'rotate(40deg) scaleY(1)'
-                        : 'rotate(40deg) scaleY(0)',
-                      transformOrigin: 'center bottom',
-                      transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                      transitionDelay: isActive ? '0.26s' : '0s',
-                    }}
-                  />
+                  <svg
+                    width="70"
+                    height="70"
+                    viewBox="0 0 70 70"
+                    fill="none"
+                    style={{ overflow: 'visible', width: '100%', height: '100%' }}
+                  >
+                    {/* Dash 1: Top vertical dash, near upper-right corner */}
+                    <line
+                      x1="14"
+                      y1="32"
+                      x2="15"
+                      y2="14"
+                      stroke="#e5a00d"
+                      strokeWidth="4.5"
+                      strokeLinecap="round"
+                      style={{
+                        transformOrigin: '14px 32px',
+                        transform: isActive ? 'scale(1)' : 'scale(0)',
+                        transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        transitionDelay: isActive ? '0.06s' : '0s',
+                      }}
+                    />
+                    {/* Dash 2: Corner diagonal dash */}
+                    <line
+                      x1="28"
+                      y1="28"
+                      x2="44"
+                      y2="14"
+                      stroke="#e5a00d"
+                      strokeWidth="4.5"
+                      strokeLinecap="round"
+                      style={{
+                        transformOrigin: '28px 28px',
+                        transform: isActive ? 'scale(1)' : 'scale(0)',
+                        transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        transitionDelay: isActive ? '0.12s' : '0s',
+                      }}
+                    />
+                    {/* Dash 3: Side dash on the right side */}
+                    <line
+                      x1="38"
+                      y1="46"
+                      x2="56"
+                      y2="40"
+                      stroke="#e5a00d"
+                      strokeWidth="4.5"
+                      strokeLinecap="round"
+                      style={{
+                        transformOrigin: '38px 46px',
+                        transform: isActive ? 'scale(1)' : 'scale(0)',
+                        transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        transitionDelay: isActive ? '0.18s' : '0s',
+                      }}
+                    />
+                  </svg>
                 </div>
 
                 {/* Main Card */}
