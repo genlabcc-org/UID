@@ -87,7 +87,7 @@ const programsData = [
 ]
 
 /**
- * Film grain overlay — same technique used in the Footer.
+ * Film grain overlay — tactile risograph / film noise matching Hero and Footer.
  */
 function ProgramGrain() {
   const [grainUrl, setGrainUrl] = useState('')
@@ -117,45 +117,49 @@ function ProgramGrain() {
     setGrainUrl(canvas.toDataURL())
   }, [])
 
-  if (!grainUrl) return null
-
   return (
     <>
+      {grainUrl && (
+        <>
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: `url(${grainUrl})`,
+              backgroundRepeat: 'repeat',
+              mixBlendMode: 'overlay',
+              opacity: 0.55,
+              pointerEvents: 'none',
+              zIndex: 1,
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: `url(${grainUrl})`,
+              backgroundRepeat: 'repeat',
+              mixBlendMode: 'color-burn',
+              opacity: 0.22,
+              pointerEvents: 'none',
+              zIndex: 1,
+            }}
+          />
+        </>
+      )}
+      {/* SVG fractal noise overlay matching Hero */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: `url(${grainUrl})`,
+          pointerEvents: 'none',
+          zIndex: 1,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
           mixBlendMode: 'overlay',
-          opacity: 0.52,
-          pointerEvents: 'none',
-          zIndex: 1,
+          opacity: 0.28,
         }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url(${grainUrl})`,
-          backgroundRepeat: 'repeat',
-          mixBlendMode: 'color-burn',
-          opacity: 0.20,
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url(${grainUrl})`,
-          backgroundRepeat: 'repeat',
-          mixBlendMode: 'screen',
-          opacity: 0.15,
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
+        aria-hidden="true"
       />
     </>
   )
@@ -171,323 +175,140 @@ export default function ProgramDetailsSection() {
     <section
       id="program-details"
       style={{
-        width: '100%',
-        backgroundColor: '#eee7df',
-        padding: 'clamp(60px, 8vw, 120px) clamp(16px, 4vw, 54px)',
+        padding: '0 14px 28px',
         boxSizing: 'border-box',
-        /* Exact same gradient background as the Footer */
-        background: `
-          radial-gradient(ellipse at 10% 45%, rgba(235, 44, 22, 1) 0%, rgba(240, 70, 30, 0.96) 26%, transparent 55%),
-          radial-gradient(ellipse at 88% 96%, rgba(245, 150, 115, 0.9) 0%, rgba(240, 140, 105, 0.45) 24%, transparent 50%),
-          radial-gradient(ellipse at 85% 15%, rgba(185, 130, 245, 0.65) 0%, transparent 45%),
-          linear-gradient(105deg, #eb2c16 0%, #e2351f 16%, #7a4eb8 40%, #764db5 68%, #855ec7 100%)
-        `,
+        width: '100%',
+        background: '#ffffff',
       }}
     >
-      {/* Film grain overlay — same as Footer */}
-      <ProgramGrain />
-
+      {/* ── Main Rounded Card with Side Gaps (Matching Footer treatment) ── */}
       <div
         style={{
-          maxWidth: '1440px',
-          margin: '0 auto',
           width: '100%',
+          borderRadius: '26px',
+          overflow: 'hidden',
           position: 'relative',
-          zIndex: 2,
+          padding: 'clamp(36px, 5.8vw, 78px) clamp(20px, 4vw, 64px)',
+          boxSizing: 'border-box',
+          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.06)',
+          background: `
+            radial-gradient(ellipse at 10% 45%, rgba(235, 44, 22, 1) 0%, rgba(240, 70, 30, 0.96) 26%, transparent 55%),
+            radial-gradient(ellipse at 88% 96%, rgba(245, 150, 115, 0.9) 0%, rgba(240, 140, 105, 0.45) 24%, transparent 50%),
+            radial-gradient(ellipse at 85% 15%, rgba(185, 130, 245, 0.65) 0%, transparent 45%),
+            linear-gradient(105deg, #eb2c16 0%, #e2351f 16%, #7a4eb8 40%, #764db5 68%, #855ec7 100%)
+          `,
         }}
       >
-        {/* Section Headline & Subtitle */}
-        <div style={{ marginBottom: 'clamp(18px, 2.5vw, 28px)' }}>
-          <h2
-            style={{
-              fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-              fontSize: 'clamp(32px, 5vw, 68px)',
-              fontWeight: 600,
-              lineHeight: 1.1,
-              letterSpacing: '-0.02em',
-              color: '#ffffff',
-              margin: '0 0 16px 0',
-              padding: 0,
-              textAlign: 'start',
-            }}
-          >
-            Program details
-          </h2>
-          <p
-            style={{
-              fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-              fontSize: 'clamp(16px, 1.4vw, 20px)',
-              lineHeight: '1.55',
-              fontWeight: 400,
-              letterSpacing: 'normal',
-              color: 'rgba(255, 255, 255, 0.72)',
-              margin: 0,
-              padding: 0,
-              textAlign: 'start',
-            }}
-          >
-            Get the basics right. Enter the industry with confidence.
-          </p>
-        </div>
+        {/* Film grain noise overlay */}
+        <ProgramGrain />
 
-        {/* ── Details Card ── */}
         <div
           style={{
-            position: 'relative',
-            backgroundColor: 'rgba(255, 255, 255, 0.06)',
-            borderRadius: '16px',
-            border: '1px solid rgba(255, 255, 255, 0.10)',
-            padding: 'clamp(20px, 2.8vw, 32px) clamp(22px, 3vw, 36px)',
-            boxSizing: 'border-box',
+            maxWidth: '1440px',
+            margin: '0 auto',
             width: '100%',
-            backdropFilter: 'blur(16px)',
+            position: 'relative',
+            zIndex: 2,
           }}
         >
-          {/* Status Badge */}
-          <div style={{ marginBottom: '20px' }}>
-            <span
+          {/* Section Headline & Subtitle */}
+          <div style={{ marginBottom: 'clamp(20px, 3vw, 32px)' }}>
+            <h2
               style={{
-                display: 'inline-block',
-                padding: '5px 14px',
-                borderRadius: '999px',
-                border: 'none',
-                backgroundColor: '#ef4444',
-                color: '#ffffff',
                 fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                fontSize: '13px',
+                fontSize: 'clamp(32px, 5vw, 68px)',
                 fontWeight: 600,
-                letterSpacing: '0.01em',
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em',
+                color: '#ffffff',
+                margin: '0 0 16px 0',
+                padding: 0,
+                textAlign: 'start',
               }}
             >
-              {currentProgram.status}
-            </span>
+              Program details
+            </h2>
+            <p
+              style={{
+                fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                fontSize: 'clamp(16px, 1.4vw, 20px)',
+                lineHeight: '1.55',
+                fontWeight: 400,
+                letterSpacing: 'normal',
+                color: '#ffffff',
+                margin: 0,
+                padding: 0,
+                textAlign: 'start',
+              }}
+            >
+              Get the basics right. Enter the industry with confidence.
+            </p>
           </div>
 
-          {/* 3-Column Grid */}
+          {/* ── Details Content (No blur, no borders) ── */}
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: '1.1fr 1.2fr 0.9fr',
-              gap: '0',
-              alignItems: 'start',
+              position: 'relative',
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              borderRadius: '20px',
+              border: 'none',
+              padding: 'clamp(20px, 2.8vw, 32px) clamp(22px, 3vw, 36px)',
+              boxSizing: 'border-box',
+              width: '100%',
+              /* Removed blur effect per request */
             }}
           >
-            {/* ── Column 1: When & Where ── */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                borderRight: '1px solid rgba(255, 255, 255, 0.10)',
-                paddingRight: 'clamp(18px, 2.5vw, 36px)',
-              }}
-            >
-              <div
+            {/* Status Badge */}
+            <div style={{ marginBottom: '20px' }}>
+              <span
                 style={{
-                  fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                  fontSize: '15px',
-                  fontWeight: 700,
-                  color: '#ffffff',
-                  lineHeight: '22px',
-                  marginBottom: '18px',
-                }}
-              >
-                When & Where
-              </div>
-
-              {/* Location icon + city */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  marginBottom: '10px',
-                }}
-              >
-                {/* Location pin icon circle */}
-                <div
-                  style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                    fontSize: 'clamp(20px, 2vw, 26px)',
-                    lineHeight: 1.25,
-                    fontWeight: 600,
-                    color: '#ffffff',
-                    margin: 0,
-                  }}
-                >
-                  {currentProgram.location}
-                </h3>
-              </div>
-
-              {/* Subtext */}
-              <p
-                style={{
-                  fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                  fontSize: '14px',
-                  lineHeight: '21px',
-                  fontWeight: 400,
-                  color: 'rgba(255, 255, 255, 0.50)',
-                  margin: '0 0 12px 0',
-                }}
-              >
-                {currentProgram.statusSubtext}
-              </p>
-
-              {/* Venue link with arrow */}
-              <a
-                href={currentProgram.venueLink}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                  fontSize: '14px',
-                  lineHeight: '21px',
-                  fontWeight: 400,
-                  color: 'rgba(255, 255, 255, 0.70)',
-                  textDecoration: 'underline',
-                  textUnderlineOffset: '3px',
-                  textDecorationColor: 'rgba(255,255,255,0.35)',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '5px',
-                  cursor: 'pointer',
-                  width: 'fit-content',
-                  transition: 'color 0.2s ease',
+                  gap: '7px',
+                  padding: '6px 14px',
+                  borderRadius: '999px',
+                  border: 'none',
+                  backgroundColor: 'rgba(255, 255, 255, 0.14)',
+                  color: '#ffffff',
+                  fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.70)')}
               >
-                UID Design Studio, Nagercoil
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
-              </a>
+                <span
+                  style={{
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    backgroundColor: '#ff4433',
+                    display: 'inline-block',
+                    boxShadow: '0 0 8px rgba(255, 68, 51, 0.8)',
+                  }}
+                />
+                {currentProgram.status}
+              </span>
             </div>
 
-            {/* ── Column 2: Mentors ── */}
+            {/* 3-Column Grid (No dividing borders) */}
             <div
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                borderRight: '1px solid rgba(255, 255, 255, 0.10)',
-                paddingLeft: 'clamp(18px, 2.5vw, 36px)',
-                paddingRight: 'clamp(18px, 2.5vw, 36px)',
+                display: 'grid',
+                gridTemplateColumns: '1.1fr 1.2fr 0.9fr',
+                gap: 'clamp(20px, 3vw, 40px)',
+                alignItems: 'start',
               }}
             >
-              <div
-                style={{
-                  fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                  fontSize: '15px',
-                  fontWeight: 700,
-                  color: '#ffffff',
-                  lineHeight: '22px',
-                  marginBottom: '18px',
-                }}
-              >
-                Mentors
-              </div>
-
+              {/* ── Column 1: When & Where ── */}
               <div
                 style={{
                   display: 'flex',
-                  gap: 'clamp(24px, 3vw, 40px)',
-                  flexWrap: 'wrap',
+                  flexDirection: 'column',
+                  border: 'none',
+                  borderRight: 'none',
+                  paddingRight: 'clamp(10px, 1.5vw, 20px)',
                 }}
               >
-                {currentProgram.mentors.map((mentor, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      minWidth: '110px',
-                    }}
-                  >
-                    {/* Mentor Image — circular like the reference */}
-                    <div
-                      style={{
-                        width: '68px',
-                        height: '68px',
-                        borderRadius: '50%',
-                        overflow: 'hidden',
-                        marginBottom: '10px',
-                        border: '2px solid rgba(255, 255, 255, 0.12)',
-                      }}
-                    >
-                      <img
-                        src={mentor.image}
-                        alt={mentor.name}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          display: 'block',
-                        }}
-                      />
-                    </div>
-
-                    <div
-                      style={{
-                        fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                        fontSize: '15px',
-                        lineHeight: '21px',
-                        fontWeight: 600,
-                        color: '#ffffff',
-                        marginBottom: '2px',
-                      }}
-                    >
-                      {mentor.name}
-                    </div>
-
-                    <div
-                      style={{
-                        fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                        fontSize: '13px',
-                        lineHeight: '19px',
-                        fontWeight: 400,
-                        color: 'rgba(255, 255, 255, 0.50)',
-                      }}
-                    >
-                      {mentor.role}
-                      <br />
-                      <span style={{ color: 'rgba(255, 255, 255, 0.65)', fontWeight: 500 }}>
-                        {mentor.org}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* ── Column 3: Pricing & Action ── */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                paddingLeft: 'clamp(18px, 2.5vw, 36px)',
-                height: '100%',
-              }}
-            >
-              <div>
                 <div
                   style={{
                     fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
@@ -498,90 +319,318 @@ export default function ProgramDetailsSection() {
                     marginBottom: '18px',
                   }}
                 >
-                  Pricing
+                  When & Where
                 </div>
 
-                {/* Price Display */}
+                {/* Location icon + city */}
                 <div
                   style={{
                     display: 'flex',
-                    alignItems: 'baseline',
+                    alignItems: 'center',
                     gap: '10px',
-                    marginBottom: '4px',
-                    flexWrap: 'wrap',
+                    marginBottom: '10px',
                   }}
                 >
-                  <span
+                  {/* Location pin icon circle */}
+                  <div
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                      border: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </div>
+                  <h3
                     style={{
                       fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                      fontSize: 'clamp(26px, 2.8vw, 34px)',
-                      lineHeight: '40px',
-                      fontWeight: 700,
+                      fontSize: 'clamp(20px, 2vw, 26px)',
+                      lineHeight: 1.25,
+                      fontWeight: 600,
                       color: '#ffffff',
+                      margin: 0,
                     }}
                   >
-                    ₹{currentProgram.startingPrice}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                      fontSize: '16px',
-                      fontWeight: 400,
-                      color: 'rgba(255, 255, 255, 0.40)',
-                      textDecoration: 'line-through',
-                    }}
-                  >
-                    ₹{currentProgram.originalPrice}
-                  </span>
+                    {currentProgram.location}
+                  </h3>
                 </div>
 
-                {/* Pricing Disclaimer */}
+                {/* Subtext */}
+                <p
+                  style={{
+                    fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                    fontSize: '14px',
+                    lineHeight: '21px',
+                    fontWeight: 400,
+                    color: '#ffffff',
+                    margin: '0 0 12px 0',
+                  }}
+                >
+                  {currentProgram.statusSubtext}
+                </p>
+
+                {/* Venue link with arrow */}
+                <a
+                  href={currentProgram.venueLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                    fontSize: '14px',
+                    lineHeight: '21px',
+                    fontWeight: 400,
+                    color: '#ffffff',
+                    textDecoration: 'underline',
+                    textUnderlineOffset: '3px',
+                    textDecorationColor: '#ffffff',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    cursor: 'pointer',
+                    width: 'fit-content',
+                    transition: 'opacity 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+                >
+                  UID Design Studio, Nagercoil
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* ── Column 2: Mentors ── */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  border: 'none',
+                  borderRight: 'none',
+                  paddingLeft: 'clamp(10px, 1.5vw, 20px)',
+                  paddingRight: 'clamp(10px, 1.5vw, 20px)',
+                }}
+              >
                 <div
                   style={{
                     fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                    fontSize: '12px',
-                    lineHeight: '18px',
-                    fontWeight: 400,
-                    color: 'rgba(255, 255, 255, 0.40)',
-                    marginBottom: '22px',
+                    fontSize: '15px',
+                    fontWeight: 700,
+                    color: '#ffffff',
+                    lineHeight: '22px',
+                    marginBottom: '18px',
                   }}
                 >
-                  (Early bird registration)*inclusive of GST
+                  Mentors
+                </div>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: 'clamp(24px, 3vw, 40px)',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {currentProgram.mentors.map((mentor, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        minWidth: '110px',
+                      }}
+                    >
+                      {/* Mentor Image — circular without border */}
+                      <div
+                        style={{
+                          width: '68px',
+                          height: '68px',
+                          borderRadius: '50%',
+                          overflow: 'hidden',
+                          marginBottom: '10px',
+                          border: 'none',
+                        }}
+                      >
+                        <img
+                          src={mentor.image}
+                          alt={mentor.name}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            display: 'block',
+                          }}
+                        />
+                      </div>
+
+                      <div
+                        style={{
+                          fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                          fontSize: '15px',
+                          lineHeight: '21px',
+                          fontWeight: 600,
+                          color: '#ffffff',
+                          marginBottom: '2px',
+                        }}
+                      >
+                        {mentor.name}
+                      </div>
+
+                      <div
+                        style={{
+                          fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                          fontSize: '13px',
+                          lineHeight: '19px',
+                          fontWeight: 400,
+                          color: '#ffffff',
+                        }}
+                      >
+                        {mentor.role}
+                        <br />
+                        <span style={{ color: '#ffffff', fontWeight: 600 }}>
+                          {mentor.org}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Register Button — solid dark purple like the reference */}
-              <div>
-                <a
-                  href="#contact"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: 'linear-gradient(135deg, #3b2667 0%, #2a1a4e 100%)',
-                    color: '#ffffff',
-                    fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    padding: '12px 32px',
-                    borderRadius: '10px',
-                    border: 'none',
-                    cursor: 'pointer',
-                    transition: 'all 0.25s ease',
-                    letterSpacing: '0.01em',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #4c3380 0%, #3b2667 100%)'
-                    e.currentTarget.style.transform = 'translateY(-1px)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #3b2667 0%, #2a1a4e 100%)'
-                    e.currentTarget.style.transform = 'translateY(0)'
-                  }}
-                >
-                  Register Now
-                </a>
+              {/* ── Column 3: Pricing & Action ── */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  paddingLeft: 'clamp(10px, 1.5vw, 20px)',
+                  height: '100%',
+                  border: 'none',
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                      fontSize: '15px',
+                      fontWeight: 700,
+                      color: '#ffffff',
+                      lineHeight: '22px',
+                      marginBottom: '18px',
+                    }}
+                  >
+                    Pricing
+                  </div>
+
+                  {/* Price Display */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      gap: '10px',
+                      marginBottom: '4px',
+                      flexWrap: 'wrap',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                        fontSize: 'clamp(26px, 2.8vw, 34px)',
+                        lineHeight: '40px',
+                        fontWeight: 700,
+                        color: '#ffffff',
+                      }}
+                    >
+                      ₹{currentProgram.startingPrice}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                        fontSize: '16px',
+                        fontWeight: 400,
+                        color: '#ffffff',
+                        opacity: 0.75,
+                        textDecoration: 'line-through',
+                      }}
+                    >
+                      ₹{currentProgram.originalPrice}
+                    </span>
+                  </div>
+
+                  {/* Pricing Disclaimer */}
+                  <div
+                    style={{
+                      fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                      fontSize: '12px',
+                      lineHeight: '18px',
+                      fontWeight: 400,
+                      color: '#ffffff',
+                      marginBottom: '22px',
+                    }}
+                  >
+                    (Early bird registration)*inclusive of GST
+                  </div>
+                </div>
+
+                {/* Register Button */}
+                <div>
+                  <a
+                    href="#faq"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      backgroundColor: '#ffffff',
+                      color: '#141414',
+                      fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                      fontSize: '15px',
+                      fontWeight: 600,
+                      textDecoration: 'none',
+                      padding: '13px 32px',
+                      borderRadius: '999px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+                      transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                      letterSpacing: '-0.01em',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#fdf8f4'
+                      e.currentTarget.style.transform = 'translateY(-2px)'
+                      e.currentTarget.style.boxShadow = '0 14px 32px rgba(0, 0, 0, 0.22)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#ffffff'
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)'
+                    }}
+                  >
+                    <span>Register Now</span>
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

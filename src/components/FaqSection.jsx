@@ -45,17 +45,30 @@ export default function FaqSection() {
         backgroundColor: '#ffffff',
         padding: 'clamp(60px, 8vw, 120px) clamp(16px, 4vw, 54px)',
         boxSizing: 'border-box',
+        display: 'flex',
+        justifyContent: 'center',
       }}
     >
       <div
         style={{
-          maxWidth: '1200px',
+          maxWidth: '960px',
           margin: '0 auto',
           width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        {/* ── Section Header ── */}
-        <div style={{ marginBottom: 'clamp(32px, 5vw, 54px)' }}>
+        {/* ── Section Header (Centered) ── */}
+        <div
+          style={{
+            marginBottom: 'clamp(32px, 5vw, 54px)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+          }}
+        >
           {/* Eyebrow */}
           <div
             style={{
@@ -94,14 +107,14 @@ export default function FaqSection() {
               color: '#141414',
               margin: '0px',
               padding: '0px',
-              textAlign: 'start',
+              textAlign: 'center',
             }}
           >
             Frequently Asked Questions
           </h2>
         </div>
 
-        {/* ── FAQ List (Matching Reference Screenshot) ── */}
+        {/* ── FAQ List (Centered Container) ── */}
         <div
           style={{
             borderTop: '1px solid rgba(20, 20, 20, 0.12)',
@@ -152,7 +165,7 @@ export default function FaqSection() {
                     {item.question}
                   </span>
 
-                  {/* Toggle Chevron Icon (Matching Reference) */}
+                  {/* Toggle Chevron Icon */}
                   <span
                     style={{
                       display: 'flex',

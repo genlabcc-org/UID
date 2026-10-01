@@ -1,5 +1,6 @@
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import UidSection from '../components/UidSection'
 import JourneySection from '../components/JourneySection'
 import ProgramsSection from '../components/ProgramsSection'
 import WhyUidSection from '../components/WhyUidSection'
@@ -25,6 +26,9 @@ export default function HomePage() {
 
       {/* 1. Hero Section */}
       <Hero />
+
+      {/* 1b. UID Kinetic Fullscreen Horizontal Section */}
+      <UidSection />
 
       {/* 2. Why UID is Different */}
       <WhyUidSection />

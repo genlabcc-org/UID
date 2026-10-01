@@ -194,17 +194,17 @@ export default function Footer() {
                     style={{
                       fontSize: 14,
                       fontWeight: 400,
-                      color: 'rgba(255, 255, 255, 0.72)',
+                      color: '#ffffff',
                       textDecoration: 'none',
-                      transition: 'color 0.2s ease, transform 0.2s ease',
+                      transition: 'opacity 0.2s ease, transform 0.2s ease',
                       letterSpacing: '0.01em',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#ffffff'
+                      e.currentTarget.style.opacity = '0.75'
                       e.currentTarget.style.transform = 'translateX(2px)'
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.72)'
+                      e.currentTarget.style.opacity = '1'
                       e.currentTarget.style.transform = 'translateX(0)'
                     }}
                   >
@@ -236,17 +236,17 @@ export default function Footer() {
                     style={{
                       fontSize: 14,
                       fontWeight: 400,
-                      color: 'rgba(255, 255, 255, 0.72)',
+                      color: '#ffffff',
                       textDecoration: 'none',
-                      transition: 'color 0.2s ease, transform 0.2s ease',
+                      transition: 'opacity 0.2s ease, transform 0.2s ease',
                       letterSpacing: '0.01em',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#ffffff'
+                      e.currentTarget.style.opacity = '0.75'
                       e.currentTarget.style.transform = 'translateX(2px)'
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.72)'
+                      e.currentTarget.style.opacity = '1'
                       e.currentTarget.style.transform = 'translateX(0)'
                     }}
                   >
@@ -265,7 +265,7 @@ export default function Footer() {
               alignItems: 'center',
               gap: 32,
               fontSize: 13,
-              color: 'rgba(255, 255, 255, 0.65)',
+              color: '#ffffff',
               fontWeight: 400,
               letterSpacing: '0.01em',
             }}
@@ -273,17 +273,17 @@ export default function Footer() {
             <a
               href="#"
               style={{
-                color: 'rgba(255, 255, 255, 0.65)',
+                color: '#ffffff',
                 textDecoration: 'none',
-                transition: 'color 0.2s',
+                transition: 'opacity 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.65)')}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.75')}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             >
               Legal notice
             </a>
 
-            <span>© 2026 Guillaume Zhu</span>
+            <span style={{ color: '#ffffff' }}>© 2026 UID — Uncommon Institute of Design</span>
           </div>
         </div>
       </div>
