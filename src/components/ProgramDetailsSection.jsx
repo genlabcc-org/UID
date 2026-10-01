@@ -1,14 +1,20 @@
 import { useState } from 'react'
 
+const studioAddress = '121/C, Kottar–Parvathipuram Rd, Chetti Kulam, Simon Nagar, Nagercoil, Tamil Nadu 629001'
+const studioDirectionsLink = 'https://www.google.com/maps/search/?api=1&query=121%2FC%2C+Kottar%E2%80%93Parvathipuram+Rd%2C+Chetti+Kulam%2C+Simon+Nagar%2C+Nagercoil%2C+Tamil+Nadu+629001'
+const studioPhone = '+919994535121'
+const studioPhoneDisplay = '+91 99945 35121'
+
 const programsData = [
   {
     id: 'design-engineer',
     name: 'Design Engineer',
     startingPrice: '50,000',
     originalPrice: '75,000',
-    location: 'Chennai',
-    venue: 'UID Design Studio, Chennai',
-    venueLink: '#',
+    location: 'Nagercoil, Tamil Nadu',
+    venue: studioAddress,
+    venueLink: studioDirectionsLink,
+    phone: studioPhoneDisplay,
     status: 'Upcoming batch',
     statusSubtext: 'New batch starts soon',
     mentors: [
@@ -31,9 +37,10 @@ const programsData = [
     name: 'Visual design',
     startingPrice: '50,000',
     originalPrice: '75,000',
-    location: 'Chennai',
-    venue: 'UID Design Studio, Chennai',
-    venueLink: '#',
+    location: 'Nagercoil, Tamil Nadu',
+    venue: studioAddress,
+    venueLink: studioDirectionsLink,
+    phone: studioPhoneDisplay,
     status: 'Upcoming batch',
     statusSubtext: 'New batch starts soon',
     mentors: [
@@ -56,9 +63,10 @@ const programsData = [
     name: 'Film making',
     startingPrice: '50,000',
     originalPrice: '75,000',
-    location: 'Chennai',
-    venue: 'UID Design Studio, Chennai',
-    venueLink: '#',
+    location: 'Nagercoil, Tamil Nadu',
+    venue: studioAddress,
+    venueLink: studioDirectionsLink,
+    phone: studioPhoneDisplay,
     status: 'Upcoming batch',
     statusSubtext: 'New batch starts soon',
     mentors: [
@@ -276,7 +284,7 @@ export default function ProgramDetailsSection() {
                 When &amp; Where
               </div>
 
-              {/* City Title */}
+              {/* City / Region Title */}
               <h3
                 style={{
                   fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
@@ -284,7 +292,7 @@ export default function ProgramDetailsSection() {
                   lineHeight: 1.25,
                   fontWeight: 500,
                   color: '#141414',
-                  margin: '0 0 8px 0',
+                  margin: '0 0 10px 0',
                   padding: 0,
                   textAlign: 'start',
                 }}
@@ -292,27 +300,73 @@ export default function ProgramDetailsSection() {
                 {currentProgram.location}
               </h3>
 
-              {/* Venue Link with clean styling */}
-              <a
-                href={currentProgram.venueLink}
+              {/* Exact Address */}
+              <p
                 style={{
                   fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
-                  fontSize: 'clamp(15px, 1.4vw, 19px)',
-                  lineHeight: '26px',
+                  fontSize: 'clamp(14px, 1.25vw, 16px)',
+                  lineHeight: '24px',
                   fontWeight: 400,
                   color: '#505050',
-                  textDecoration: 'underline',
-                  textUnderlineOffset: '4px',
+                  margin: '0 0 12px 0',
+                  maxWidth: '340px',
+                }}
+              >
+                {currentProgram.venue}
+              </p>
+
+              {/* Get Directions Link */}
+              <a
+                href={currentProgram.venueLink}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                  fontSize: '15px',
+                  lineHeight: '24px',
+                  fontWeight: 500,
+                  color: '#ff6230',
+                  textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
                   cursor: 'pointer',
                   width: 'fit-content',
+                  marginBottom: '16px',
+                  transition: 'opacity 0.2s ease',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.75')}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+              >
+                [Get Directions →]
+              </a>
+
+              {/* Phone Line */}
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontFamily: "'Articulat CF', 'Articulatcf', sans-serif",
+                  fontSize: '15px',
+                  lineHeight: '22px',
                 }}
               >
-                {currentProgram.venue}
-                <span style={{ fontSize: '16px' }}>↗</span>
-              </a>
+                <span style={{ color: '#505050', fontWeight: 400 }}>Phone:</span>
+                <a
+                  href={`tel:${studioPhone}`}
+                  style={{
+                    color: '#141414',
+                    fontWeight: 500,
+                    textDecoration: 'none',
+                    transition: 'color 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#ff6230')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = '#141414')}
+                >
+                  {currentProgram.phone}
+                </a>
+              </div>
             </div>
 
             {/* ── Column 2: Mentors ── */}

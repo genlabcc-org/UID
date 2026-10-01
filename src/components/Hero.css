@@ -82,7 +82,8 @@
 }
 
 /* Lenis Integration Classes */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
