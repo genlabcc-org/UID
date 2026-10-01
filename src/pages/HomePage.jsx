@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import UidSection from '../components/UidSection'
@@ -9,8 +10,21 @@ import YourJourneySection from '../components/YourJourneySection'
 import ProgramDetailsSection from '../components/ProgramDetailsSection'
 import FaqSection from '../components/FaqSection'
 import Footer from '../components/Footer'
+import RegistrationModal from '../components/RegistrationModal'
 
 export default function HomePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedProgram, setSelectedProgram] = useState('design-engineer')
+
+  const handleOpenRegistration = (programId = 'design-engineer') => {
+    setSelectedProgram(programId)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseRegistration = () => {
+    setIsModalOpen(false)
+  }
+
   return (
     <div
       style={{
@@ -22,7 +36,7 @@ export default function HomePage() {
       }}
     >
       {/* Floating Pill Header */}
-      <Header />
+      <Header onOpenRegistration={() => handleOpenRegistration('design-engineer')} />
 
       {/* 1. Hero Section */}
       <Hero />
@@ -43,7 +57,7 @@ export default function HomePage() {
       <MentorsSection />
 
       {/* 6. Program Details */}
-      <ProgramDetailsSection />
+      <ProgramDetailsSection onRegister={(progId) => handleOpenRegistration(progId)} />
 
       {/* 7. Reset. Rewire. Release (Pinned GSAP Sequence) */}
       <JourneySection />
@@ -53,6 +67,14 @@ export default function HomePage() {
 
       {/* 9. Footer */}
       <Footer />
+
+      {/* Popup Registration Modal */}
+      <RegistrationModal
+        isOpen={isModalOpen}
+        onClose={handleCloseRegistration}
+        defaultProgram={selectedProgram}
+      />
     </div>
   )
 }
+

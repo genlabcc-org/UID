@@ -5,7 +5,7 @@ import './Header.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Header() {
+export default function Header({ onOpenRegistration }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -56,8 +56,6 @@ export default function Header() {
 
   const handleSmoothScroll = (e, targetId) => {
     e.preventDefault();
-    setAboutOpen(false);
-    setBusinessOpen(false);
     setMobileMenuOpen(false);
     const element = document.querySelector(targetId);
     if (element) {
@@ -138,13 +136,13 @@ export default function Header() {
           {/* Right: Dark Capsule Cluster (No business design menu) */}
           <div className="header-right-capsule">
             {/* Contact Us Button */}
-            <a
-              href="#faq"
-              onClick={(e) => handleSmoothScroll(e, '#faq')}
+            <button
+              type="button"
+              onClick={() => onOpenRegistration && onOpenRegistration()}
               className="btn-contact-us"
             >
               Contact Us
-            </a>
+            </button>
 
             {/* Mobile Hamburger Button */}
             <button
@@ -266,13 +264,16 @@ export default function Header() {
 
             {/* Mobile Contact Action */}
             <div className="mobile-nav-footer">
-              <a
-                href="#faq"
-                onClick={(e) => handleSmoothScroll(e, '#faq')}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onOpenRegistration) onOpenRegistration();
+                }}
                 className="mobile-nav-cta-btn"
               >
                 Get in Touch with Mentors →
-              </a>
+              </button>
             </div>
           </div>
         </div>

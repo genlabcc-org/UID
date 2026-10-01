@@ -1,0 +1,333 @@
+/* ========================================================
+   REGISTRATION & CONTACT POPUP MODAL (COMPACT MINIMAL WHITE)
+   ======================================================== */
+
+.reg-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.52);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(14px, 2.5vw, 24px);
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.reg-modal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reg-modal-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: #ffffff;
+  color: #111111;
+  border-radius: 24px;
+  border: none;
+  outline: none;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  padding: clamp(22px, 3.2vw, 32px);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transform: scale(0.96) translateY(10px);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  margin: auto;
+}
+
+.reg-modal-backdrop.open .reg-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+/* Close Button (X) - minimal, borderless */
+.reg-modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #f3f3f3;
+  border: none;
+  outline: none;
+  color: #555555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  z-index: 10;
+}
+
+.reg-modal-close-btn:hover {
+  background-color: #e8e8e8;
+  color: #111111;
+  transform: scale(1.05);
+}
+
+/* Title & Description - minimal compact */
+.reg-modal-title {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(20px, 2.5vw, 23px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: #111111;
+  margin: 0 0 6px 0;
+  padding-right: 32px;
+}
+
+.reg-modal-subtext {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.48;
+  color: #666666;
+  margin: 0 0 16px 0;
+}
+
+/* Program Selector Pills - minimal, compact */
+.reg-program-label {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #666666;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.reg-programs-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.reg-program-btn {
+  padding: 8px 6px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #f4f4f4;
+  color: #555555;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.reg-program-btn:hover {
+  background-color: #ececec;
+  color: #111111;
+}
+
+.reg-program-btn.active {
+  background-color: #111111;
+  color: #ffffff;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Form Groups & Inputs */
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.reg-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reg-input-label {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #444444;
+}
+
+.reg-input-field {
+  width: 100%;
+  padding: 10px 13px;
+  border-radius: 10px;
+  background-color: #f4f4f5;
+  border: none;
+  outline: none;
+  color: #111111;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  box-sizing: border-box;
+  transition: background-color 0.18s ease;
+}
+
+.reg-input-field::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.reg-input-field:focus {
+  background-color: #ebebee;
+  border: none;
+  outline: none;
+}
+
+.reg-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Submit Action Button - compact */
+.reg-submit-btn {
+  margin-top: 4px;
+  width: 100%;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  background-color: #111111;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reg-submit-btn:hover {
+  background-color: #242424;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.reg-submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Privacy note with SVG icon */
+.reg-privacy-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: #888888;
+  text-align: center;
+  margin: 5px 0 0 0;
+}
+
+.reg-privacy-note svg {
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+/* ── Success Screen ── */
+.reg-success-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 0 8px 0;
+}
+
+.reg-success-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #10b981;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.reg-success-title {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #111111;
+  margin: 0 0 8px 0;
+}
+
+.reg-success-desc {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #555555;
+  margin: 0 0 20px 0;
+  max-width: 360px;
+}
+
+.reg-done-btn {
+  padding: 9px 28px;
+  border-radius: 999px;
+  background-color: #111111;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.reg-done-btn:hover {
+  background-color: #242424;
+  transform: translateY(-1px);
+}
+
+/* Responsive queries */
+@media (max-width: 500px) {
+  .reg-modal-card {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .reg-programs-selector {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .reg-program-btn {
+    text-align: left;
+    padding: 8px 12px;
+  }
+
+  .reg-input-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
