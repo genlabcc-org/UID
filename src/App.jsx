@@ -1,5 +1,10 @@
 import HomePage from './pages/HomePage'
+import SmoothScroll from './components/SmoothScroll'
 
 export default function App() {
-  return <HomePage />
+  return (
+    <SmoothScroll>
+      <HomePage />
+    </SmoothScroll>
+  )
 }

@@ -104,7 +104,7 @@ export default function Footer() {
         padding: '0 14px 14px',
         boxSizing: 'border-box',
         width: '100%',
-        background: '#eee7df',
+        background: '#ffffff',
       }}
     >
       {/* ── Main Rounded Footer Card ── */}

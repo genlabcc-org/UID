@@ -4,7 +4,7 @@ import JourneySection from '../components/JourneySection'
 import ProgramsSection from '../components/ProgramsSection'
 import WhyUidSection from '../components/WhyUidSection'
 import MentorsSection from '../components/MentorsSection'
-import DTourSection from '../components/DTourSection'
+import YourJourneySection from '../components/YourJourneySection'
 import ProgramDetailsSection from '../components/ProgramDetailsSection'
 import FaqSection from '../components/FaqSection'
 import Footer from '../components/Footer'
@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <div
       style={{
-        background: '#eee7df',
+        background: '#ffffff',
         minHeight: '100vh',
         width: '100%',
         display: 'flex',
@@ -32,8 +32,8 @@ export default function HomePage() {
       {/* 3. Our Programs */}
       <ProgramsSection />
 
-      {/* 4. D.Tour */}
-      <DTourSection />
+      {/* 4. Your Journey */}
+      <YourJourneySection />
 
       {/* 5. Meet Our Mentors */}
       <MentorsSection />

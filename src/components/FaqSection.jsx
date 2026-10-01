@@ -42,7 +42,7 @@ export default function FaqSection() {
       id="faq"
       style={{
         width: '100%',
-        backgroundColor: '#eee7df',
+        backgroundColor: '#ffffff',
         padding: 'clamp(60px, 8vw, 120px) clamp(16px, 4vw, 54px)',
         boxSizing: 'border-box',
       }}

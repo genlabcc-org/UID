@@ -39,7 +39,7 @@ export default function WhyUidSection() {
       id="why-uid"
       style={{
         width: '100%',
-        backgroundColor: '#eee7df',
+        backgroundColor: '#ffffff',
         padding: 'clamp(64px, 8vw, 130px) clamp(16px, 4vw, 54px)',
         boxSizing: 'border-box',
       }}

@@ -172,9 +172,8 @@ export default function ProgramDetailsSection() {
       id="program-details"
       style={{
         width: '100%',
-        position: 'relative',
-        overflow: 'hidden',
-        padding: 'clamp(40px, 5vw, 72px) clamp(16px, 4vw, 54px)',
+        backgroundColor: '#eee7df',
+        padding: 'clamp(60px, 8vw, 120px) clamp(16px, 4vw, 54px)',
         boxSizing: 'border-box',
         /* Exact same gradient background as the Footer */
         background: `

@@ -4,18 +4,20 @@ const mentors = [
   {
     id: 1,
     name: 'Anurag S',
-    specialty: 'Design Mentor, UID',
+    role: 'Design Mentor, UID',
     description:
       'Brings hands-on industry experience in product and interaction design, mentoring students to think like designers before they touch a tool.',
     image: '/222.png',
+    logos: '/shivi-logos.png',
   },
   {
     id: 2,
     name: 'Henrich P',
-    specialty: 'Design Mentor, UID',
+    role: 'Design Mentor, UID',
     description:
-      'Focused on building strong design fundamentals and real-world execution, guiding students from concept to confident creators',
+      'Focused on building strong design fundamentals and real-world execution, guiding students from concept to confident creators.',
     image: '/222.png',
+    logos: '/surya-logos.png',
   },
 ]
 
@@ -23,7 +25,7 @@ export default function MentorsSection() {
   return (
     <section className="mentors-section" id="mentors">
       <div className="mentors-container">
-        {/* Eyebrow Section Tag */}
+        {/* Eyebrow Label */}
         <div
           style={{
             display: 'inline-flex',
@@ -47,52 +49,43 @@ export default function MentorsSection() {
               display: 'inline-block',
             }}
           />
-          Meet Your Mentors
+          Mentors
         </div>
 
         {/* Section Headline */}
-        <div className="mentors-header">
-          <h2 className="mentors-headline">Learn from people who've actually done it.</h2>
-        </div>
+        <h2 className="mentors-title">Meet your Mentors</h2>
 
-        {/* ── 2 Big Images in Single Row ── */}
-        <div className="mentors-grid-2col">
+        {/* ── 2 Mentor Cards Grid ── */}
+        <div className="mentors-grid">
           {mentors.map((mentor) => (
-            <article key={mentor.id} className="mentor-big-card">
-              {/* 1. Large Image Frame */}
-              <div className="mentor-big-image-frame">
-                <img
-                  src={mentor.image}
-                  alt={mentor.name}
-                  className="mentor-big-image"
-                  loading="lazy"
-                />
+            <article key={mentor.id} className="mentor-card">
+              {/* Header: Avatar + Info */}
+              <div className="mentor-header">
+                <div className="mentor-avatar-wrap">
+                  <img
+                    src={mentor.image}
+                    alt={mentor.name}
+                    className="mentor-avatar-img"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="mentor-meta">
+                  <h3 className="mentor-name">{mentor.name}</h3>
+                  <p className="mentor-role">{mentor.role}</p>
+                </div>
               </div>
 
-              {/* 2. Editorial Text Content Below Image */}
-              <div className="mentor-big-content">
-                <h3 className="mentor-big-name">{mentor.name}</h3>
+              {/* Bio description */}
+              <p className="mentor-bio">{mentor.description}</p>
 
-                {/* Accent Tag Line with Icon */}
-                <div className="mentor-big-tag">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#ff6230"
-                    strokeWidth="2.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{ flexShrink: 0 }}
-                  >
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                  </svg>
-                  <span>{mentor.specialty}</span>
-                </div>
-
-                {/* Description */}
-                <p className="mentor-big-desc">{mentor.description}</p>
+              {/* Company / Client Experience Logos */}
+              <div className="mentor-logos-wrap">
+                <img
+                  src={mentor.logos}
+                  alt={`${mentor.name} client experience`}
+                  className="mentor-logos-img"
+                  loading="lazy"
+                />
               </div>
             </article>
           ))}
@@ -101,3 +94,4 @@ export default function MentorsSection() {
     </section>
   )
 }
+
