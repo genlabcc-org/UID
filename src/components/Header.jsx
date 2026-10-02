@@ -10,29 +10,46 @@ export default function Header({ onOpenRegistration }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // 1. Direct scroll evaluation: only switch color once Hero finishes and Why UID section arrives
+    // Switch to scrolled pill as soon as Hero finishes and UidSection arrives
+    const getTargetEl = () => document.getElementById('uid') || document.getElementById('why-uid');
+
     const checkScroll = () => {
-      const whyUidEl = document.getElementById('why-uid');
-      if (whyUidEl) {
-        const rect = whyUidEl.getBoundingClientRect();
-        setIsScrolled(rect.top <= 80);
+      const targetEl = getTargetEl();
+      const headerEl = document.querySelector('.site-header-container');
+      if (targetEl) {
+        const rect = targetEl.getBoundingClientRect();
+        const pastHero = rect.top <= 80;
+        setIsScrolled(pastHero);
+        if (!pastHero) {
+          headerEl?.classList.remove('header-hidden');
+        }
       } else {
-        setIsScrolled(window.scrollY > 800);
+        const pastHero = window.scrollY > 400;
+        setIsScrolled(pastHero);
+        if (!pastHero) {
+          headerEl?.classList.remove('header-hidden');
+        }
       }
     };
 
     window.addEventListener('scroll', checkScroll, { passive: true });
     checkScroll();
 
-    // 2. GSAP ScrollTrigger to ensure exact synchronization with hero transition
+    // GSAP ScrollTrigger to ensure exact synchronization with #uid arrival
     let trigger = null;
     const timeout = setTimeout(() => {
-      trigger = ScrollTrigger.create({
-        trigger: '#why-uid',
-        start: 'top 80px',
-        onEnter: () => setIsScrolled(true),
-        onLeaveBack: () => setIsScrolled(false),
-      });
+      const targetEl = getTargetEl();
+      if (targetEl) {
+        trigger = ScrollTrigger.create({
+          trigger: targetEl,
+          start: 'top 80px',
+          onEnter: () => setIsScrolled(true),
+          onLeaveBack: () => {
+            setIsScrolled(false);
+            document.querySelector('.site-header-container')?.classList.remove('header-hidden');
+          },
+        });
+      }
     }, 300);
 
     return () => {

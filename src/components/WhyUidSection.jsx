@@ -37,16 +37,19 @@ export default function WhyUidSection() {
   return (
     <section
       id="why-uid"
+      className="why-uid-section"
       style={{
         width: '100%',
         backgroundColor: '#ffffff',
         padding: 'clamp(64px, 8vw, 130px) clamp(16px, 4vw, 54px)',
         boxSizing: 'border-box',
+        position: 'relative',
+        zIndex: 30,
+        transform: 'translate3d(0, 0, 0)',
+        WebkitTransform: 'translate3d(0, 0, 0)',
+        willChange: 'transform',
       }}
     >
-      {/* Anchor for journey navigation fallback */}
-      <div id="journey" style={{ position: 'relative', top: '-80px' }} />
-
       <div
         style={{
           maxWidth: '1440px',
@@ -64,6 +67,7 @@ export default function WhyUidSection() {
         >
           {/* Eyebrow Label */}
           <div
+            className="why-uid-eyebrow"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -75,6 +79,13 @@ export default function WhyUidSection() {
               letterSpacing: '0.06em',
               color: '#141414',
               marginBottom: '18px',
+              position: 'relative',
+              zIndex: 2,
+              transform: 'translate3d(0, 0, 0)',
+              WebkitTransform: 'translate3d(0, 0, 0)',
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              willChange: 'transform, opacity',
             }}
           >
             <span
@@ -84,6 +95,7 @@ export default function WhyUidSection() {
                 borderRadius: '50%',
                 backgroundColor: '#ff6230',
                 display: 'inline-block',
+                flexShrink: 0,
               }}
             />
             Why UID is Different

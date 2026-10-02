@@ -1,6 +1,24 @@
 /* ========================================================
    WHY UID SECTION RESPONSIVE STYLES
    ======================================================== */
+.why-uid-section {
+  position: relative;
+  z-index: 30;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+.why-uid-eyebrow {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
 .why-uid-headline {
   font-family: 'Articulat CF', 'Articulatcf', sans-serif;
   font-size: clamp(26px, 3.8vw, 54px);
@@ -12,6 +30,10 @@
   padding: 0;
   text-align: start;
   max-width: 100%;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .why-uid-headline .headline-line-1 {
@@ -48,6 +70,10 @@
 }
 
 @media (max-width: 680px) {
+  .why-uid-section {
+    padding-top: clamp(80px, 14vw, 100px) !important;
+  }
+
   .why-uid-headline .headline-line-1 {
     display: inline;
   }

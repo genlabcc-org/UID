@@ -12,7 +12,7 @@ const programs = [
     tags: 'UI/UX Design · Interaction Design · Front-End Development',
     description:
       'For the ones who want to design it and build it. Learn to think like a designer and code like an engineer — the rare combo the industry is actually short on.',
-    image: '/222.png',
+    image: '/Design Engineer.png',
   },
   {
     id: '02',
@@ -20,7 +20,7 @@ const programs = [
     tags: 'Graphic Design · Art · Illustration',
     description:
       'For the storytellers who think in color, shape, and composition. Master the craft of visual communication from brand identity to original illustration.',
-    image: '/222.png',
+    image: '/graphic-design.avif',
   },
   {
     id: '03',
@@ -28,7 +28,7 @@ const programs = [
     tags: 'Video Editing · Shooting · Camera Handling · Motion Graphics',
     description:
       'For the ones who see the world in frames. Learn to shoot, edit, and bring motion to your ideas — from raw footage to final cut.',
-    image: '/222.png',
+    image: '/photography.jpeg',
   },
 ];
 
@@ -126,6 +126,7 @@ export default function ProgramsSection() {
           onEnter: hideHeader,
           onLeave: showHeader,
           onEnterBack: hideHeader,
+          onLeaveBack: showHeader,
         },
       });
 
