@@ -88,13 +88,31 @@ function HeavyGrain() {
  *     Line 2: a creative team
  *     Line 3: Apprenticeship · October 2026
  * - Explore & Contact navigation columns
- * - Legal notice & copyright
+ * - Community link & copyright
  */
 export default function Footer() {
-  const exploreLinks = ['Journey', 'Toolkit', 'Projects', 'Playground', 'Contact']
+  const exploreLinks = [
+    { label: 'Why UID', href: '#why-uid' },
+    { label: 'Programs', href: '#programs' },
+    { label: 'D.Tour', href: '#dtour' },
+    { label: 'Mentors', href: '#mentors' },
+    { label: 'Details', href: '#program-details' },
+    { label: 'Community', href: 'https://mdp.mark9.cc/', external: true },
+  ]
+
+  const handleSmoothScroll = (e, href) => {
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }
+
   const contactLinks = [
+    { label: 'Instagram', href: 'https://instagram.com' },
     { label: 'LinkedIn', href: 'https://linkedin.com' },
-    { label: 'GitHub', href: 'https://github.com' },
     { label: 'Email', href: 'mailto:contact@uid.design' },
   ]
 
@@ -189,8 +207,11 @@ export default function Footer() {
                 </span>
                 {exploreLinks.map((item) => (
                   <a
-                    key={item}
-                    href="#"
+                    key={item.label}
+                    href={item.href}
+                    target={item.external ? '_blank' : undefined}
+                    rel={item.external ? 'noopener noreferrer' : undefined}
+                    onClick={(e) => handleSmoothScroll(e, item.href)}
                     style={{
                       fontSize: 14,
                       fontWeight: 400,
@@ -208,7 +229,7 @@ export default function Footer() {
                       e.currentTarget.style.transform = 'translateX(0)'
                     }}
                   >
-                    {item}
+                    {item.label}
                   </a>
                 ))}
               </div>
@@ -257,7 +278,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ── Bottom Row: Legal notice & Copyright ── */}
+          {/* ── Bottom Row: Community & Copyright ── */}
           <div
             style={{
               marginTop: 'clamp(46px, 5.5vw, 76px)',
@@ -271,7 +292,9 @@ export default function Footer() {
             }}
           >
             <a
-              href="#"
+              href="https://mdp.mark9.cc/"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 color: '#ffffff',
                 textDecoration: 'none',
@@ -280,7 +303,7 @@ export default function Footer() {
               onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.75')}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             >
-              Legal notice
+              Community
             </a>
 
             <span style={{ color: '#ffffff' }}>© 2026 UID — Uncommon Institute of Design</span>
