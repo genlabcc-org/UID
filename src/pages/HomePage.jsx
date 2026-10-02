@@ -7,6 +7,7 @@ import ProgramsSection from '../components/ProgramsSection'
 import WhyUidSection from '../components/WhyUidSection'
 import MentorsSection from '../components/MentorsSection'
 import YourJourneySection from '../components/YourJourneySection'
+import DTourSection from '../components/DTourSection'
 import ProgramDetailsSection from '../components/ProgramDetailsSection'
 import FaqSection from '../components/FaqSection'
 import Footer from '../components/Footer'
@@ -50,10 +51,13 @@ export default function HomePage() {
       {/* 3. Our Programs */}
       <ProgramsSection />
 
-      {/* 4. Your Journey */}
+      {/* 4. D.Tour Visual Campaign Section */}
+      <DTourSection />
+
+      {/* 5. Your Journey */}
       <YourJourneySection />
 
-      {/* 5. Meet Our Mentors */}
+      {/* 6. Meet Our Mentors */}
       <MentorsSection />
 
       {/* 6. Program Details */}

@@ -1,0 +1,247 @@
+/* ==========================================================================
+   D.TOUR EDITORIAL CAMPAIGN SECTION
+   - 1st scroll: "D TOUR" text only comes in (3D character flip-in stagger)
+   - 2nd scroll: 5 big images glide up above the text and auto-slide continuously
+   - Zero hover effects, original natural color photography
+   ========================================================================== */
+
+.dtour-campaign-section {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
+}
+
+/* ── Fullscreen Pinned Viewport ── */
+.dtour-campaign-viewport {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* ── Top Bar ("CAMPAIGN") — Fixed at top of viewport ── */
+.dtour-campaign-topbar {
+  position: absolute;
+  top: clamp(24px, 4vh, 48px);
+  left: 0;
+  right: 0;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 64px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.dtour-campaign-label {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.dtour-campaign-meta {
+  font-family: 'Space Grotesk', monospace, sans-serif;
+  font-size: clamp(10px, 0.8vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+/* ── Center Fixed Text Layer ("D TOUR", z-index: 1) ── */
+.dtour-campaign-text-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.dtour-campaign-giant-title {
+  font-family: 'Mori', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(5rem, 18.5vw, 19rem);
+  font-weight: 800;
+  line-height: 0.84;
+  letter-spacing: -0.02em;
+  color: #000000;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  white-space: nowrap;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* 3D Character Spans matching ProgramsSection SplitText */
+.dtour-campaign-giant-title .char {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-origin: 0% 50% -50px;
+}
+
+/* ── Sliding Images Layer (z-index: 2 — ABOVE the text) ── */
+.dtour-campaign-images-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  /* Layered strictly ABOVE the text */
+  pointer-events: auto;
+  overflow: visible;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ── Seamless Infinite Auto-Slide Track ── */
+.dtour-campaign-track {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: clamp(24px, 3.5vw, 48px);
+  width: max-content;
+  will-change: transform;
+  animation: dtourInfiniteAutoSlide 32s linear infinite;
+}
+
+@keyframes dtourInfiniteAutoSlide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ── Big Cinematic Image Card ── */
+.dtour-slide-card {
+  flex: 0 0 auto;
+  position: relative;
+  width: clamp(500px, 48vw, 820px);
+  aspect-ratio: 16 / 11;
+  max-height: clamp(480px, 66vh, 740px);
+  background: #f0f0f0;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.22), 0 10px 28px rgba(0, 0, 0, 0.1);
+  will-change: transform;
+  opacity: 1 !important;
+  /* Always visible inside the sliding layer */
+}
+
+.dtour-slide-image-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dtour-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Original natural full color, no black & white filter */
+  filter: none !important;
+  /* Zero hover transform */
+  transform: none !important;
+}
+
+/* Static clean editorial captions */
+.dtour-slide-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(16px, 2vw, 26px);
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 58%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.dtour-slide-caption {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  color: #ffffff;
+}
+
+.dtour-slide-figure {
+  font-size: clamp(10px, 0.85vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.dtour-slide-desc {
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 400;
+  opacity: 0.92;
+  letter-spacing: 0.03em;
+}
+
+/* ── Bottom Right Slide Counter ── */
+.dtour-campaign-counter {
+  position: absolute;
+  bottom: clamp(24px, 4vh, 44px);
+  right: clamp(24px, 4vw, 64px);
+  font-family: 'Space Grotesk', monospace, sans-serif;
+  font-size: clamp(10px, 0.8vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #888888;
+  z-index: 4;
+}
+
+/* ── Responsive Adaptations ── */
+@media (max-width: 860px) {
+  .dtour-campaign-giant-title {
+    font-size: clamp(3.4rem, 16vw, 6.5rem);
+  }
+
+  .dtour-slide-card {
+    width: clamp(340px, 80vw, 560px);
+    aspect-ratio: 16 / 11;
+    max-height: 56vh;
+  }
+}
+
+@media (max-width: 540px) {
+  .dtour-campaign-giant-title {
+    font-size: clamp(2.8rem, 17vw, 4.5rem);
+  }
+
+  .dtour-slide-card {
+    width: 88vw;
+    aspect-ratio: 16 / 11;
+    max-height: 52vh;
+  }
+}
