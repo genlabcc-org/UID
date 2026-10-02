@@ -111,7 +111,7 @@ export default function Footer() {
   }
 
   const contactLinks = [
-    { label: 'Instagram', href: 'https://instagram.com' },
+    { label: 'Instagram', href: 'https://www.instagram.com/uid.cc/' },
     { label: 'LinkedIn', href: 'https://linkedin.com' },
     { label: 'Email', href: 'mailto:contact@uid.design' },
   ]
