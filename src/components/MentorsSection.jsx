@@ -25,8 +25,9 @@ const mentors = [
     image: '/Henrich Sir.png',
     logos: [
       '/deloitte.jpg',
-      '/logo1.png',
-      '/mark9.png',
+      '/Airports_Authority_of_India_logo.svg',
+      // '/logo1.png',
+      // '/mark9.png',
     ],
   },
 ]
@@ -95,7 +96,7 @@ export default function MentorsSection() {
                     <img
                       src={logo}
                       alt={`${mentor.name} client logo ${idx + 1}`}
-                      className={`mentor-logo-img ${logo.includes('deloitte') ? 'logo-deloitte' : ''} ${logo.includes('mark9') ? 'logo-mark9' : ''} ${logo.includes('logo1') ? 'logo-circle' : ''} ${logo.includes('Mercedes') ? 'logo-mercedes' : ''}`}
+                      className={`mentor-logo-img ${logo.includes('deloitte') ? 'logo-deloitte' : ''} ${logo.includes('mark9') ? 'logo-mark9' : ''} ${logo.includes('logo1') ? 'logo-circle' : ''} ${logo.includes('Mercedes') ? 'logo-mercedes' : ''} ${logo.includes('Airports_Authority') ? 'logo-aai' : ''}`}
                       loading="lazy"
                     />
                   </div>
