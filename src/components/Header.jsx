@@ -148,6 +148,16 @@ export default function Header({ onOpenRegistration }) {
                 Details
               </a>
             </li>
+            <li>
+              <a
+                href="https://mdp.mark9.cc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="header-nav-link"
+              >
+                Community
+              </a>
+            </li>
           </ul>
 
           {/* Right: Dark Capsule Cluster (No business design menu) */}
@@ -244,6 +254,15 @@ export default function Header({ onOpenRegistration }) {
                 className="mobile-nav-item"
               >
                 Details
+              </a>
+              <a
+                href="https://mdp.mark9.cc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mobile-nav-item"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Community
               </a>
               <a
                 href="#faq"
