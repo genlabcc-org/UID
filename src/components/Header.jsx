@@ -176,12 +176,13 @@ export default function Header({ onOpenRegistration }) {
         </nav>
       </header>
 
-      {/* ── Fullscreen Glassmorphic Mobile Navigation Overlay ── */}
+      {/* ── Minimal Mobile Navigation Overlay ── */}
       <div
         className={`mobile-nav-overlay ${mobileMenuOpen ? 'open' : ''}`}
         aria-hidden={!mobileMenuOpen}
+        onClick={() => setMobileMenuOpen(false)}
       >
-        <div className="mobile-nav-panel">
+        <div className="mobile-nav-panel" onClick={(e) => e.stopPropagation()}>
           {/* Header row inside drawer */}
           <div className="mobile-nav-header">
             <img
@@ -199,10 +200,9 @@ export default function Header({ onOpenRegistration }) {
             </button>
           </div>
 
-          {/* Navigation Links list */}
+          {/* Minimal Navigation Links */}
           <div className="mobile-nav-body">
-            <div className="mobile-nav-group">
-              <span className="mobile-nav-group-title">Menu</span>
+            <nav className="mobile-nav-links">
               <a
                 href="#hero"
                 onClick={(e) => handleSmoothScroll(e, '#hero')}
@@ -215,21 +215,21 @@ export default function Header({ onOpenRegistration }) {
                 onClick={(e) => handleSmoothScroll(e, '#why-uid')}
                 className="mobile-nav-item"
               >
-                Why UID is Different
+                Why UID
               </a>
               <a
                 href="#programs"
                 onClick={(e) => handleSmoothScroll(e, '#programs')}
                 className="mobile-nav-item"
               >
-                Our Programs
+                Programs
               </a>
               <a
                 href="#dtour"
                 onClick={(e) => handleSmoothScroll(e, '#dtour')}
                 className="mobile-nav-item"
               >
-                D.Tour Experience
+                D.Tour
               </a>
               <a
                 href="#mentors"
@@ -243,7 +243,7 @@ export default function Header({ onOpenRegistration }) {
                 onClick={(e) => handleSmoothScroll(e, '#program-details')}
                 className="mobile-nav-item"
               >
-                Program Details
+                Details
               </a>
               <a
                 href="#faq"
@@ -252,34 +252,9 @@ export default function Header({ onOpenRegistration }) {
               >
                 FAQ
               </a>
-            </div>
+            </nav>
 
-            <div className="mobile-nav-group">
-              <span className="mobile-nav-group-title">Programs</span>
-              <a
-                href="#programs"
-                onClick={(e) => handleSmoothScroll(e, '#programs')}
-                className="mobile-nav-subitem"
-              >
-                Design Engineer
-              </a>
-              <a
-                href="#programs"
-                onClick={(e) => handleSmoothScroll(e, '#programs')}
-                className="mobile-nav-subitem"
-              >
-                Visual Design
-              </a>
-              <a
-                href="#programs"
-                onClick={(e) => handleSmoothScroll(e, '#programs')}
-                className="mobile-nav-subitem"
-              >
-                Film Making
-              </a>
-            </div>
-
-            {/* Mobile Contact Action */}
+            {/* Minimal Mobile Contact Action */}
             <div className="mobile-nav-footer">
               <button
                 type="button"
@@ -289,7 +264,7 @@ export default function Header({ onOpenRegistration }) {
                 }}
                 className="mobile-nav-cta-btn"
               >
-                Get in Touch with Mentors →
+                Contact Us
               </button>
             </div>
           </div>

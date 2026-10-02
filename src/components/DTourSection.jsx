@@ -27,7 +27,7 @@ const dtourSlides = [
     id: 1,
     figure: 'FIG. 01 — THE HORIZON',
     desc: 'Form, space, and real-world scale',
-    image: '/222.png',
+    image: '/forest2.jpg',
     position: 'center 25%',
   },
   {
