@@ -115,18 +115,53 @@
 .mentor-logos-wrap {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(14px, 1.8vw, 22px);
   margin-top: auto;
   width: 100%;
-  padding-top: 4px;
+  padding-top: 14px;
 }
 
-.mentor-logos-img {
-  height: clamp(32px, 2.8vw, 42px);
+.mentor-logo-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mentor-logo-img {
+  height: clamp(22px, 2vw, 28px);
   width: auto;
-  max-width: 100%;
+  max-width: clamp(70px, 7vw, 100px);
   object-fit: contain;
-  object-position: left center;
   display: block;
+  opacity: 0.88;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mentor-logo-img:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.mentor-logo-img.logo-deloitte {
+  height: clamp(16px, 1.5vw, 22px);
+  mix-blend-mode: multiply;
+  filter: contrast(1.45) brightness(1.05);
+}
+
+.mentor-logo-img.logo-mark9 {
+  height: clamp(24px, 2.2vw, 30px);
+  border-radius: 6px;
+}
+
+.mentor-logo-img.logo-circle {
+  height: clamp(24px, 2.2vw, 30px);
+  border-radius: 50%;
+}
+
+.mentor-logo-img.logo-mercedes {
+  height: clamp(28px, 2.6vw, 36px);
 }
 
 /* ── Mobile Responsive Stack ── */
@@ -149,7 +184,20 @@
     margin: 20px 0;
   }
 
-  .mentor-logos-img {
-    height: 30px;
+  .mentor-logos-wrap {
+    gap: 14px;
+    padding-top: 10px;
+  }
+
+  .mentor-logo-img {
+    height: 22px;
+  }
+
+  .mentor-logo-img.logo-deloitte {
+    height: 16px;
+  }
+
+  .mentor-logo-img.logo-mercedes {
+    height: 28px;
   }
 }

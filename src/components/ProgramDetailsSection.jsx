@@ -20,16 +20,16 @@ const programsData = [
     statusSubtext: 'New batch starts soon',
     mentors: [
       {
-        name: 'Shivi Ravisankar',
-        role: 'Associate UX Lead',
+        name: 'Anurag S.S',
+        role: 'Design Mentor',
         org: '@ UID',
-        image: '/222.png',
+        image: '/Anurage Sir.png',
       },
       {
-        name: 'Surya Prakashan',
-        role: 'Senior UI Engineer',
+        name: 'Henrich P',
+        role: 'Design Mentor',
         org: '@ UID',
-        image: '/222.png',
+        image: '/Henrich Sir.png',
       },
     ],
   },
