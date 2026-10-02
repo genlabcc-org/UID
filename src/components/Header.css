@@ -492,7 +492,7 @@
 /* Responsive Styles */
 @media (max-width: 860px) {
   .site-header-container {
-    top: 16px;
+    top: max(26px, calc(env(safe-area-inset-top) + 12px));
     width: calc(100vw - 24px);
     max-width: 100%;
   }
@@ -530,7 +530,7 @@
 
 @media (max-width: 400px) {
   .site-header-container {
-    top: 12px;
+    top: max(22px, calc(env(safe-area-inset-top) + 10px));
     width: calc(100vw - 16px);
   }
 

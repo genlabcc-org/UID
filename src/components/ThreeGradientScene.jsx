@@ -147,7 +147,7 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
       ctx.clearRect(0, 0, width, height);
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = `${fontWeight} ${fontSize}px 'Cabinet Grotesk', 'Plus Jakarta Sans', -apple-system, sans-serif`;
+      ctx.font = `${fontWeight} ${fontSize}px 'Mori', 'Cabinet Grotesk', 'Space Grotesk', 'Inter', -apple-system, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       if (ctx.letterSpacing !== undefined) {
@@ -159,15 +159,34 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
       const lineSpacing = fontSize * lineHeight;
       const startY = height / 2 - ((totalLines - 1) * lineSpacing) / 2;
 
-      lines.forEach((line, idx) => {
-        ctx.fillText(line.trim(), width / 2, startY + idx * lineSpacing);
-      });
+      const drawLines = () => {
+        lines.forEach((line, idx) => {
+          ctx.fillText(line.trim(), width / 2, startY + idx * lineSpacing);
+        });
+      };
+      drawLines();
 
       const tex = new THREE.CanvasTexture(textCanvas);
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.minFilter = THREE.LinearFilter;
       tex.magFilter = THREE.LinearFilter;
       tex.needsUpdate = true;
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          ctx.clearRect(0, 0, width, height);
+          ctx.fillStyle = '#ffffff';
+          ctx.font = `${fontWeight} ${fontSize}px 'Mori', 'Cabinet Grotesk', 'Space Grotesk', 'Inter', -apple-system, sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          if (ctx.letterSpacing !== undefined) {
+            ctx.letterSpacing = letterSpacing;
+          }
+          drawLines();
+          tex.needsUpdate = true;
+        });
+      }
+
       return tex;
     };
 
@@ -219,13 +238,13 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
     // Text 2: "institute of design" (Orbit view facing -X)
     const textArtDirectorMesh = createDynamicTextPlane(
       'institute of design',
-      6.0 * 0.85,
-      1.5 * 0.85,
+      5.2,
+      1.3,
       1.0,
       5.25,
       -1.75,
       -Math.PI * 0.5,
-      { fontSize: 130, fontWeight: '700', width: 2048, height: 512 }
+      { fontSize: 160, fontWeight: '700', width: 2048, height: 512 }
     );
     textArtDirectorMesh.material.opacity = 0;
 
@@ -260,26 +279,72 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    // 9. Resize Handling
+    // 9. Resize Handling (Optimized for both mobile and desktop views)
+    let lastWidth = 0;
+    let lastHeight = 0;
+
     const handleResize = () => {
       if (!container || !renderer || !camera) return;
       const w = container.clientWidth || window.innerWidth;
       const h = container.clientHeight || window.innerHeight;
+
+      // Prevent WebGL canvas buffer reallocation on mobile address bar scroll (blinking fix)
+      const isMobileHeightJitter = Math.abs(w - lastWidth) < 2 && Math.abs(h - lastHeight) < 140;
+      if (lastWidth > 0 && lastHeight > 0 && isMobileHeightJitter) {
+        return;
+      }
+      lastWidth = w;
+      lastHeight = h;
+
+      const isMobile = w <= 860 || w < h;
+      camera.fov = isMobile ? 42 : 35;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h, false);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      const dist = camera.position.distanceTo(textNameMesh.position);
+      // Calculate view dimensions at hero text distance
+      const distHero = camera.position.distanceTo(textNameMesh.position);
       const fovRad = THREE.MathUtils.degToRad(camera.fov);
-      const visibleHeight = 2 * dist * Math.tan(fovRad * 0.5);
-      const visibleWidth = visibleHeight * camera.aspect;
-      const targetScale = Math.min(
-        1,
-        (visibleWidth * 0.86) / 9.0,
-        (visibleHeight * 0.86) / 4.5
-      );
-      textNameMesh.scale.setScalar(targetScale);
+      const visibleHeightHero = 2 * distHero * Math.tan(fovRad * 0.5);
+      const visibleWidthHero = visibleHeightHero * camera.aspect;
+
+      if (isMobile) {
+        // 1. Hero text ("uncommon design"): cleanly balanced size on mobile
+        const mobileHeroScale = Math.min(1.15, (visibleWidthHero * 0.76) / 5.5);
+        textNameMesh.scale.setScalar(mobileHeroScale);
+
+        // 2. Orbit texts ("creative developer" & "institute of design")
+        // Center both along screen center (Z = 0) and stack above and below the 3D logo
+        const distOrbit = 6.0;
+        const visibleHeightOrbit = 2 * distOrbit * Math.tan(fovRad * 0.5);
+        const visibleWidthOrbit = visibleHeightOrbit * camera.aspect;
+
+        // Position "creative developer" above logo, scaled to stay comfortably on-screen
+        textCreativeDevMesh.position.set(-0.1, 6.9, 0);
+        const devScale = Math.min(1.0, (visibleWidthOrbit * 0.84) / 3.575);
+        textCreativeDevMesh.scale.setScalar(devScale);
+
+        // Position "institute of design" below logo, scaled to stay comfortably on-screen
+        textArtDirectorMesh.position.set(0.1, 5.1, 0);
+        const instScale = Math.min(1.0, (visibleWidthOrbit * 0.84) / 4.2);
+        textArtDirectorMesh.scale.setScalar(instScale);
+      } else {
+        // Desktop sizing and positions
+        const targetScale = Math.min(
+          1,
+          (visibleWidthHero * 0.86) / 9.0,
+          (visibleHeightHero * 0.86) / 4.5
+        );
+        textNameMesh.scale.setScalar(targetScale);
+
+        // Restore desktop staggered positions and 1.0 scale
+        textCreativeDevMesh.position.set(-1.0, 6.5, 1.25);
+        textCreativeDevMesh.scale.setScalar(1.0);
+
+        textArtDirectorMesh.position.set(1.0, 5.25, -1.75);
+        textArtDirectorMesh.scale.setScalar(1.0);
+      }
     };
 
     const resizeObserver = new ResizeObserver(handleResize);

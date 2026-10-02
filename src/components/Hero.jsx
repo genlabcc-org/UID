@@ -16,17 +16,40 @@ export default function Hero() {
     // Setup GSAP ScrollTrigger 3D Camera & Text Choreography
     const ctx = gsap.context(() => {
       if (heroPinContainerRef.current) {
-        ScrollTrigger.create({
-          trigger: heroPinContainerRef.current,
-          start: 'top top',
-          end: '+=3200',
-          pin: true,
-          pinSpacing: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            threeSceneRef.current?.setScroll(self.progress, self.getVelocity());
-          },
+        const mm = gsap.matchMedia();
+
+        mm.add('(min-width: 861px)', () => {
+          ScrollTrigger.create({
+            trigger: heroPinContainerRef.current,
+            start: 'top top',
+            end: '+=3200',
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            anticipatePin: 1,
+            fastScrollEnd: true,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              threeSceneRef.current?.setScroll(self.progress, self.getVelocity());
+            },
+          });
+        });
+
+        mm.add('(max-width: 860px)', () => {
+          ScrollTrigger.create({
+            trigger: heroPinContainerRef.current,
+            start: 'top top',
+            end: '+=2000',
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.8,
+            anticipatePin: 1,
+            fastScrollEnd: true,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              threeSceneRef.current?.setScroll(self.progress, self.getVelocity());
+            },
+          });
         });
       }
     });

@@ -95,13 +95,29 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Responsive adjustments: Fullscreen on mobile with 0 gaps */
+@media (max-width: 860px) {
+  :root {
+    --hero-frame-inset: 0px;
+    --border-radius-hero: 0px;
+  }
+
   .hero-pin-section {
-    padding: 8px;
+    padding: 0 !important;
+    height: 100vh;
+    border-radius: 0 !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   .hero-inner-frame {
-    border-radius: 16px;
+    border-radius: 0 !important;
+    height: 100vh;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 }
