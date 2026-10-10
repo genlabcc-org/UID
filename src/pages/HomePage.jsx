@@ -45,20 +45,20 @@ export default function HomePage() {
       {/* 1b. UID Kinetic Fullscreen Horizontal Section */}
       <UidSection />
 
-      {/* 2. Why UID is Different */}
-      <WhyUidSection />
-
-      {/* 3. Our Programs */}
+      {/* 2. Why UID is Different */}             
       <ProgramsSection />
 
+      {/* 3. Our Programs */}
+             <YourJourneySection />           
+
       {/* 4. D.Tour Visual Campaign Section */}
-      <DTourSection />
+            <MentorsSection />               
 
       {/* 5. Your Journey */}
-      <YourJourneySection />
+               <WhyUidSection />                     
 
       {/* 6. Meet Our Mentors */}
-      <MentorsSection />
+                   <DTourSection />                      
 
       {/* 6. Program Details */}
       <ProgramDetailsSection onRegister={(progId) => handleOpenRegistration(progId)} />

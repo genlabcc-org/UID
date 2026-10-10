@@ -95,7 +95,7 @@ export default function Header({ onOpenRegistration }) {
             title="UID — Uncommon Institute of Design"
           >
             <img
-              src="/logo.png"
+              src="/favicon.svg"
               alt="Uncommon Institute of Design"
               className="header-logo-img"
             />

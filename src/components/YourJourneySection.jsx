@@ -114,7 +114,7 @@ const dtourCards = [
     id: 1,
     step: '01',
     word: 'Month 1',
-    subtitle: 'Fundamentals first.',
+    subtitle: 'fundamentals first.',
     description:
       'Unlearn old habits, understand the core concepts of your chosen field, and get inspired straight from the source through our field visits, the D.Tour.',
     background: card1Bg,
@@ -238,14 +238,14 @@ export default function YourJourneySection() {
             Your Journey
           </div>
 
-          <h2 className="dtour-headline">Your Journey</h2>
+          <h2 className="dtour-headline">Design Journey</h2>
 
           <h3 className="dtour-subtitle">
-            4 field visits. Every month. Zero classroom walls.
+            4 field visits. every month. zero classroom walls.
           </h3>
 
           <p className="dtour-description">
-            Design doesn't only live on a screen — it lives in nature,
+            Design doesn't only live on a screen - it lives in nature,
             architecture, street art, and everyday life. Every month, we step out
             on D.Tour: four field visits designed to make you see differently, not
             just work differently. Inspiration first, execution after.

@@ -9,11 +9,11 @@ const mentors = [
       'Brings hands-on industry experience in product and interaction design, mentoring students to think like designers before they touch a tool.',
     image: '/Anurage Sir.png',
     logos: [
-      '/IBM-Logo.png',
-      '/Infosys-Logo.png',
-      '/Mercedes Benz.png',
-      '/logo1.png',
-      '/mark9.png',
+      '/1a.png',
+      '/2a.png',
+      '/3a.png',
+      '/4a.png',
+      '/5a.png',
     ],
   },
   {
@@ -24,9 +24,10 @@ const mentors = [
       'Focused on building strong design fundamentals and real-world execution, guiding students from concept to confident creators.',
     image: '/Henrich Sir.png',
     logos: [
-      '/deloitte.jpg',
-      '/logo1.png',
-      '/mark9.png',
+      '/1.png',
+      '/2.png',
+      '/3.png',
+      '/5.png',
     ],
   },
 ]

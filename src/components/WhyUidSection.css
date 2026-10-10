@@ -2,6 +2,13 @@
    WHY UID SECTION RESPONSIVE STYLES
    ======================================================== */
 .why-uid-section {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(64px, 8vw, 110px) 0;
+  box-sizing: border-box;
   position: relative;
   z-index: 30;
   transform: translate3d(0, 0, 0);
@@ -9,6 +16,20 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   will-change: transform;
+}
+
+.why-uid-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4.5vw, 64px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.why-uid-header-block {
+  margin-bottom: clamp(36px, 4.8vw, 60px);
+  max-width: 100%;
+  width: 100%;
 }
 
 .why-uid-eyebrow {
@@ -21,7 +42,7 @@
 
 .why-uid-headline {
   font-family: 'Articulat CF', 'Articulatcf', sans-serif;
-  font-size: clamp(26px, 3.8vw, 54px);
+  font-size: clamp(28px, 4.2vw, 58px);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -48,9 +69,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: stretch;
-  gap: clamp(28px, 4vw, 56px);
+  gap: clamp(18px, 2.2vw, 32px);
   width: 100%;
-  padding-top: clamp(36px, 4.5vw, 56px);
+  padding-top: 0;
 }
 
 .why-uid-card-wrapper {
@@ -69,9 +90,9 @@
   pointer-events: none;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 860px) {
   .why-uid-section {
-    padding-top: clamp(80px, 14vw, 100px) !important;
+    padding: clamp(48px, 8vw, 70px) 0 !important;
   }
 
   .why-uid-headline .headline-line-1 {
@@ -84,9 +105,9 @@
 
   .why-uid-pillars-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding-top: 28px;
-    padding-right: 18px;
+    gap: 24px;
+    padding-top: 12px;
+    padding-right: 0;
     box-sizing: border-box;
   }
 

@@ -132,10 +132,11 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
     const createDynamicTextTexture = (
       text,
       {
-        fontSize = 220,
+        fontSize = 200,
         fontWeight = '800',
         lineHeight = 1.05,
         letterSpacing = '-0.02em',
+        textAlign = 'center',
         width = 2048,
         height = 1024,
       } = {}
@@ -144,27 +145,51 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
       textCanvas.width = width;
       textCanvas.height = height;
       const ctx = textCanvas.getContext('2d');
-      ctx.clearRect(0, 0, width, height);
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = `${fontWeight} ${fontSize}px 'Mori', 'Cabinet Grotesk', 'Space Grotesk', 'Inter', -apple-system, sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      if (ctx.letterSpacing !== undefined) {
-        ctx.letterSpacing = letterSpacing;
-      }
 
       const lines = Array.isArray(text) ? text : String(text).split('\n');
       const totalLines = lines.length;
-      const lineSpacing = fontSize * lineHeight;
-      const startY = height / 2 - ((totalLines - 1) * lineSpacing) / 2;
 
-      const drawLines = () => {
+      const render = () => {
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = '#ffffff';
+
+        let activeFontSize = fontSize;
+        ctx.font = `${fontWeight} ${activeFontSize}px 'Mori', 'Cabinet Grotesk', 'Space Grotesk', 'Inter', -apple-system, sans-serif`;
+
+        // Check if any line overflows canvas width and reduce font size accordingly
+        let maxW = 0;
+        lines.forEach((l) => {
+          const w = ctx.measureText(l.trim()).width;
+          if (w > maxW) maxW = w;
+        });
+
+        if (maxW > width * 0.86) {
+          activeFontSize = Math.floor(activeFontSize * ((width * 0.86) / maxW));
+          ctx.font = `${fontWeight} ${activeFontSize}px 'Mori', 'Cabinet Grotesk', 'Space Grotesk', 'Inter', -apple-system, sans-serif`;
+        }
+
+        ctx.textAlign = textAlign;
+        ctx.textBaseline = 'middle';
+        if (ctx.letterSpacing !== undefined) {
+          ctx.letterSpacing = letterSpacing;
+        }
+
+        const lineSpacing = activeFontSize * lineHeight;
+        const startY = height / 2 - ((totalLines - 1) * lineSpacing) / 2;
+
+        let drawX = width / 2;
+        if (textAlign === 'left') {
+          drawX = (width - maxW) / 2;
+        } else if (textAlign === 'right') {
+          drawX = (width + maxW) / 2;
+        }
+
         lines.forEach((line, idx) => {
-          ctx.fillText(line.trim(), width / 2, startY + idx * lineSpacing);
+          ctx.fillText(line.trim(), drawX, startY + idx * lineSpacing);
         });
       };
-      drawLines();
+
+      render();
 
       const tex = new THREE.CanvasTexture(textCanvas);
       tex.colorSpace = THREE.SRGBColorSpace;
@@ -174,15 +199,7 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
 
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(() => {
-          ctx.clearRect(0, 0, width, height);
-          ctx.fillStyle = '#ffffff';
-          ctx.font = `${fontWeight} ${fontSize}px 'Mori', 'Cabinet Grotesk', 'Space Grotesk', 'Inter', -apple-system, sans-serif`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          if (ctx.letterSpacing !== undefined) {
-            ctx.letterSpacing = letterSpacing;
-          }
-          drawLines();
+          render();
           tex.needsUpdate = true;
         });
       }
@@ -223,42 +240,62 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
       return mesh;
     };
 
-    // Text 1: "uncommon" on line 1, "design" on line 2 (Center initial view facing Z)
+    // Responsive textures for Hero: Desktop (2 lines: "uncommon" / "institute of design") & Mobile (3 lines)
+    const heroDesktopTex = createDynamicTextTexture('uncommon\ninstitute of design', {
+      fontSize: 180,
+      fontWeight: '800',
+      lineHeight: 1.05,
+      width: 2048,
+      height: 1024,
+    });
+
+    const heroMobileTex = createDynamicTextTexture('uncommon\ninstitute\nof design', {
+      fontSize: 220,
+      fontWeight: '800',
+      lineHeight: 1.08,
+      width: 2048,
+      height: 1200,
+    });
+
+    // Text 1: "uncommon" on line 1, "institute of design" on line 2 (Center initial view facing Z)
     const textNameMesh = createDynamicTextPlane(
-      'uncommon\ndesign',
+      'uncommon\ninstitute of design',
       9.0,
       4.5,
       0,
       0,
       -2.5,
       0,
-      { fontSize: 240, fontWeight: '800', lineHeight: 1.05, width: 2048, height: 1024 }
+      { fontSize: 180, fontWeight: '800', lineHeight: 1.05, width: 2048, height: 1024 }
     );
 
-    // Text 2: "institute of design" (Orbit view facing -X)
+    // Text 2: "think\nuncommon" (Left alignment, Orbit view facing -X)
     const textArtDirectorMesh = createDynamicTextPlane(
-      'institute of design',
+      'think\nuncommon',
       5.2,
-      1.3,
+      2.6,
       1.0,
       5.25,
       -1.75,
       -Math.PI * 0.5,
-      { fontSize: 160, fontWeight: '700', width: 2048, height: 512 }
+      { fontSize: 220, fontWeight: '700', lineHeight: 1.05, textAlign: 'left', width: 2048, height: 1024 }
     );
     textArtDirectorMesh.material.opacity = 0;
 
-    // Text 3: "creative developer" (Orbit view facing -X)
-    const textCreativeDevMesh = createTextPlane(
-      '/textures/texts/text-creative-developer.webp',
-      5.5 * 0.65,
-      1.4 * 0.65,
-      -1.0,
+    // Text 3: "be\nuncommon" (Right alignment, Orbit view facing -X)
+    const textCreativeDevMesh = createDynamicTextPlane(
+      'be\nuncommon',
+      5.2,
+      2.6,
+      1.0,
       6.5,
       1.25,
-      -Math.PI * 0.5
+      -Math.PI * 0.5,
+      { fontSize: 220, fontWeight: '700', lineHeight: 1.05, textAlign: 'right', width: 2048, height: 1024 }
     );
     textCreativeDevMesh.material.opacity = 0;
+
+
 
     // 8. Mouse & Parallax State
     const mouseState = {
@@ -310,26 +347,41 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
       const visibleWidthHero = visibleHeightHero * camera.aspect;
 
       if (isMobile) {
-        // 1. Hero text ("uncommon design"): cleanly balanced size on mobile
-        const mobileHeroScale = Math.min(1.15, (visibleWidthHero * 0.76) / 5.5);
+        // Swap to 3-line mobile texture ("uncommon\ninstitute\nof design")
+        if (textNameMesh.material.map !== heroMobileTex) {
+          textNameMesh.material.map = heroMobileTex;
+          textNameMesh.material.needsUpdate = true;
+        }
+
+        // Clean mobile scale that fits comfortably within mobile screen width
+        const mobileHeroScale = Math.min(
+          (visibleWidthHero * 0.84) / 6.0,
+          (visibleHeightHero * 0.50) / 4.5
+        );
         textNameMesh.scale.setScalar(mobileHeroScale);
 
-        // 2. Orbit texts ("creative developer" & "institute of design")
+        // 2. Orbit texts ("think\nuncommon" & "be\nuncommon")
         // Center both along screen center (Z = 0) and stack above and below the 3D logo
         const distOrbit = 6.0;
         const visibleHeightOrbit = 2 * distOrbit * Math.tan(fovRad * 0.5);
         const visibleWidthOrbit = visibleHeightOrbit * camera.aspect;
 
-        // Position "creative developer" above logo, scaled to stay comfortably on-screen
-        textCreativeDevMesh.position.set(-0.1, 6.9, 0);
-        const devScale = Math.min(1.0, (visibleWidthOrbit * 0.84) / 3.575);
+        // Position "be\nuncommon" above logo, scaled to stay comfortably on-screen
+        textCreativeDevMesh.position.set(-0.1, 7.0, 0);
+        const devScale = Math.min(1.0, (visibleWidthOrbit * 0.84) / 4.8);
         textCreativeDevMesh.scale.setScalar(devScale);
 
-        // Position "institute of design" below logo, scaled to stay comfortably on-screen
-        textArtDirectorMesh.position.set(0.1, 5.1, 0);
-        const instScale = Math.min(1.0, (visibleWidthOrbit * 0.84) / 4.2);
+        // Position "think\nuncommon" below logo, scaled to stay comfortably on-screen
+        textArtDirectorMesh.position.set(0.1, 5.0, 0);
+        const instScale = Math.min(1.0, (visibleWidthOrbit * 0.84) / 4.8);
         textArtDirectorMesh.scale.setScalar(instScale);
       } else {
+        // Swap to desktop 2-line texture ("uncommon\ninstitute of design")
+        if (textNameMesh.material.map !== heroDesktopTex) {
+          textNameMesh.material.map = heroDesktopTex;
+          textNameMesh.material.needsUpdate = true;
+        }
+
         // Desktop sizing and positions
         const targetScale = Math.min(
           1,
@@ -339,7 +391,7 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
         textNameMesh.scale.setScalar(targetScale);
 
         // Restore desktop staggered positions and 1.0 scale
-        textCreativeDevMesh.position.set(-1.0, 6.5, 1.25);
+        textCreativeDevMesh.position.set(1.0, 6.5, 1.25);
         textCreativeDevMesh.scale.setScalar(1.0);
 
         textArtDirectorMesh.position.set(1.0, 5.25, -1.75);
@@ -386,10 +438,11 @@ const ThreeGradientScene = forwardRef(function ThreeGradientScene(
       const spinSpeed = 0.25 + THREE.MathUtils.clamp(vel * 0.002, 0, 1.5);
       logoGroup.rotateOnAxis(new THREE.Vector3(0.2, 1.0, 0.1).normalize(), delta * spinSpeed);
 
-      // 1. Text: "guillaume zhu" translates down and fades out between 0.15 and 0.45
-      const nameOpacity = 1.0 - THREE.MathUtils.smoothstep(p, 0.15, 0.45);
+      // 1. Text: "uncommon institute of design" translates upwards and fades out cleanly
+      const nameOpacity = 1.0 - THREE.MathUtils.smoothstep(p, 0.08, 0.38);
       textNameMesh.material.opacity = nameOpacity;
-      textNameMesh.position.y = -p * 2.8;
+      // Translates upward relative to camera so it moves up and out of the viewport
+      textNameMesh.position.y = targetHeight + p * 5.0;
 
       // 2. Texts: "art director" and "creative developer" emerge between 0.45 and 0.75
       // and remain 100% visible and settled from 0.75 to 1.0

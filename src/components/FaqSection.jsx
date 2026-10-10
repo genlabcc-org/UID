@@ -29,7 +29,7 @@ const faqData = [
 ]
 
 export default function FaqSection() {
-  const [openIndices, setOpenIndices] = useState([0]) // First item open by default
+  const [openIndices, setOpenIndices] = useState([]) // All FAQs closed by default
 
   const toggleItem = (index) => {
     setOpenIndices((prev) =>

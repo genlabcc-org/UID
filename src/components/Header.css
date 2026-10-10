@@ -83,8 +83,8 @@
 }
 
 .header-pill-scrolled .header-logo-img {
-  filter: none;
-  /* Original crisp black logo on white pill */
+  filter: brightness(0);
+  /* Crisp black logo on white pill in UID and scrolled sections */
 }
 
 .header-pill-scrolled .header-nav-link {

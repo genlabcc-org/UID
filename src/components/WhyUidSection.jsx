@@ -35,36 +35,10 @@ export default function WhyUidSection() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section
-      id="why-uid"
-      className="why-uid-section"
-      style={{
-        width: '100%',
-        backgroundColor: '#ffffff',
-        padding: 'clamp(64px, 8vw, 130px) clamp(16px, 4vw, 54px)',
-        boxSizing: 'border-box',
-        position: 'relative',
-        zIndex: 30,
-        transform: 'translate3d(0, 0, 0)',
-        WebkitTransform: 'translate3d(0, 0, 0)',
-        willChange: 'transform',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1440px',
-          margin: '0 auto',
-          width: '100%',
-        }}
-      >
+    <section id="why-uid" className="why-uid-section">
+      <div className="why-uid-container">
         {/* ── Section Header ── */}
-        <div
-          style={{
-            marginBottom: 'clamp(44px, 6vw, 76px)',
-            maxWidth: '100%',
-            width: '100%',
-          }}
-        >
+        <div className="why-uid-header-block">
           {/* Eyebrow Label */}
           <div
             className="why-uid-eyebrow"
@@ -78,7 +52,7 @@ export default function WhyUidSection() {
               textTransform: 'uppercase',
               letterSpacing: '0.06em',
               color: '#141414',
-              marginBottom: '18px',
+              marginBottom: '14px',
               position: 'relative',
               zIndex: 2,
               transform: 'translate3d(0, 0, 0)',
@@ -103,8 +77,7 @@ export default function WhyUidSection() {
 
           {/* Large Punchy Headline strictly in 2 lines on desktop, wraps cleanly on mobile */}
           <h2 className="why-uid-headline">
-            <span className="headline-line-1">No long lectures. No recorded videos.</span>
-            <br />
+            <span className="headline-line-1">No lectures. No  videos.</span>
             <span className="headline-line-2">No boring.</span>
           </h2>
 

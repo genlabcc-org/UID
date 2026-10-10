@@ -12,7 +12,7 @@ const programs = [
     tags: 'UI/UX Design · Interaction Design · Front-End Development',
     description:
       'For the ones who want to design it and build it. Learn to think like a designer and code like an engineer — the rare combo the industry is actually short on.',
-    image: '/Design Engineering.png',
+    image: '/Design Enginering.png',
   },
   {
     id: '02',
@@ -320,7 +320,7 @@ export default function ProgramsSection() {
         <div className="programs-headline-block">
           <h2 ref={headlineRef} className="programs-headline">
             <span className="programs-headline-split" aria-label="Pick your lane.">
-              {'Pick your lane.'.split('').map((char, i) => (
+              {'pick your lane.'.split('').map((char, i) => (
                 <span
                   key={i}
                   className="char"
