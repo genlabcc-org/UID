@@ -164,6 +164,11 @@
   height: clamp(28px, 2.6vw, 36px);
 }
 
+.mentor-logo-img.logo-aai {
+  height: clamp(26px, 2.4vw, 34px);
+  max-width: clamp(75px, 7.5vw, 105px);
+}
+
 /* ── Mobile Responsive Stack ── */
 @media (max-width: 860px) {
   .mentors-section {
@@ -199,5 +204,9 @@
 
   .mentor-logo-img.logo-mercedes {
     height: 28px;
+  }
+
+  .mentor-logo-img.logo-aai {
+    height: 25px;
   }
 }
