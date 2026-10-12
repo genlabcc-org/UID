@@ -112,8 +112,8 @@ export default function Footer() {
 
   const contactLinks = [
     { label: 'Instagram', href: 'https://www.instagram.com/uid.cc/' },
-    { label: 'LinkedIn', href: 'https://linkedin.com' },
-    { label: 'Email', href: 'mailto:contact@uid.design' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/company/uncommon-institute-of-design/' },
+    
   ]
 
   return (
@@ -252,7 +252,7 @@ export default function Footer() {
                   <a
                     key={item.label}
                     href={item.href}
-                    target="_blank"
+                    target="_blank" 
                     rel="noreferrer"
                     style={{
                       fontSize: 14,
