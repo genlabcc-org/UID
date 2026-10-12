@@ -25,35 +25,35 @@ function SplitText({ text, className }) {
 const dtourSlides = [
   {
     id: 1,
-    figure: 'FIG. 01 — THE HORIZON',
+    figure: 'D Tour. 01',
     desc: 'Form, space, and real-world scale',
     image: '/Architecture.png',
     position: 'center 25%',
   },
   {
     id: 2,
-    figure: 'FIG. 02 — THE SILHOUETTE',
+    figure: 'D Tour. 02',
     desc: 'Structure, balance, and proportions',
     image: '/Beach.png',
     position: 'center 45%',
   },
   {
     id: 3,
-    figure: 'FIG. 03 — THE TERRAIN',
+    figure: 'D Tour. 03',
     desc: 'Tactile earth, grass, and raw nature',
     image: '/Desert.png',
     position: 'center 85%',
   },
   {
     id: 4,
-    figure: 'FIG. 04 — SCALE & SPACE',
+    figure: 'D Tour. 04',
     desc: 'Vast sky, atmosphere, and natural light',
     image: '/Forest Visit 1.png',
     position: 'center 15%',
   },
   {
     id: 5,
-    figure: 'FIG. 05 — TACTILE CRAFT',
+    figure: 'D Tour. 05',
     desc: 'Knit textures, materials, and details',
     image: '/Mall.png',
     position: 'center 60%',
@@ -219,7 +219,7 @@ export default function DTourSection() {
                     <span className="dtour-slide-figure">
                       <SplitText text={slide.figure} className="dtour-figure-split" />
                     </span>
-                    <span className="dtour-slide-desc">{slide.desc}</span>
+                    <span className="dtour-slide-desc"></span>
                   </div>
                 </div>
               </div>

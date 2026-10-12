@@ -9,13 +9,22 @@ export default function SmoothScroll({ children }) {
   useEffect(() => {
     // Initialize site-wide smooth scrolling with Lenis
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.1, // Smooth, responsive linear interpolation without runaway momentum
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.8, // Controlled wheel sensitivity to maintain tactile grip
+      touchMultiplier: 1.0,
+      syncTouch: false, // Let mobile touch devices use smooth native scrolling
+      virtualScroll: (data) => {
+        // Dampen high-velocity flick spikes so fast scrolling remains completely in control
+        const threshold = 60;
+        if (Math.abs(data.deltaY) > threshold) {
+          const sign = Math.sign(data.deltaY);
+          const excess = Math.abs(data.deltaY) - threshold;
+          data.deltaY = sign * (threshold + Math.pow(excess, 0.72));
+        }
+      },
     });
 
     // Sync Lenis scroll updates with GSAP ScrollTrigger
