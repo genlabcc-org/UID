@@ -77,8 +77,7 @@ export default function WhyUidSection() {
 
           {/* Large Punchy Headline strictly in 2 lines on desktop, wraps cleanly on mobile */}
           <h2 className="why-uid-headline">
-            <span className="headline-line-1">No lectures. No  videos.</span>
-            <span className="headline-line-2">No boring.</span>
+            No lectures. No videos. No boring.
           </h2>
 
           {/* Subtitle / Lead Paragraph */}

@@ -235,7 +235,7 @@ export default function YourJourneySection() {
           {/* Eyebrow Label */}
           <div className="dtour-eyebrow">
             <span className="dtour-eyebrow-dot" />
-            Your Journey
+            DESIGN IS EVERYWHERE
           </div>
 
           <h2 className="dtour-headline">Design Journey</h2>
@@ -274,7 +274,7 @@ export default function YourJourneySection() {
                 {/* Top: Your Journey tag & step */}
                 <div className="dtour-card-top">
                   <div className="dtour-card-month-tag">
-                    <span>Your Journey</span>
+                    <span>Design Journey</span>
                   </div>
                   <span className="dtour-card-step">{card.step} / 03</span>
                 </div>

@@ -192,7 +192,7 @@ export default function DTourSection() {
         {/* ── Fixed Center Text Layer ("D TOUR" with ProgramsSection 3D Flip-In/Flip-Out) ── */}
         <div className="dtour-campaign-text-layer">
           <h2 ref={titleRef} className="dtour-campaign-giant-title">
-            <SplitText text="D TOUR" className="dtour-title-split" />
+            <SplitText text="D.TOUR" className="dtour-title-split" />
           </h2>
         </div>
 

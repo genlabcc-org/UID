@@ -178,7 +178,7 @@ export default function Footer() {
                   a creative team
                 </span>
                 <span style={{ display: 'block' }}>
-                  Apprenticeship · October 2026
+                  Apprenticeship - October 2026
                 </span>
               </h2>
             </div>
