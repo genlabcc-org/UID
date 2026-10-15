@@ -105,7 +105,11 @@ export default function Footer() {
       e.preventDefault()
       const element = document.querySelector(href)
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
+        if (window.lenis) {
+          window.lenis.scrollTo(element, { duration: 1.2 })
+        } else {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
       }
     }
   }

@@ -76,7 +76,11 @@ export default function Header({ onOpenRegistration }) {
     setMobileMenuOpen(false);
     const element = document.querySelector(targetId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(element, { duration: 1.2 });
+      } else {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
